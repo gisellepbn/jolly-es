@@ -75,3 +75,26 @@ class Question(models.Model):
 
 
 
+class Answer(models.Model):
+
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True, unique=True, editable=False)
+    participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer_key = models.CharField(max_length=1)
+    time = models.TimeField()
+    score = models.PositiveIntegerField(default=0)
+    submitted = models.DateTimeField(auto_now_add=True, editable=False)
+
+
+    class Meta:
+        ordering = ['time']
+
+
+    def __str__(self):
+        return self.answer_key
+
+
+
+
+
+
