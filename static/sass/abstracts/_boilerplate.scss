@@ -1,0 +1,29 @@
+@use 'variables' as *;
+
+html {
+	font-size: 100%;
+}
+
+body {
+	overflow-x: hidden;
+	font-family: $font-family;
+	background-color: $primary-color;
+	color: $text-color;
+	scroll-behavior: smooth;
+	scroll-padding-top: 5rem;
+	transition: 0.2s linear;
+}
+
+*::selection {
+	background-color: $secondary-color;
+	color: $text-color;
+	font-weight: $font-regular;
+}
+
+.text {
+	resize: none;
+}
+
+li {
+	list-style-type: none;
+}

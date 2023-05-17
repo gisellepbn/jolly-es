@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jolly'
+    'quizzes'
 ]
 
 MIDDLEWARE = [
@@ -85,6 +85,7 @@ DATABASES = {
 
 
 AUTH_USER_MODEL = 'quizzes.User'
+
 
 
 # Password validation
