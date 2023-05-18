@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
 <title>Jolly Quiz App</title>
 {% endblock %}
@@ -9,6 +9,13 @@
 <head>
     {% include 'navbar.html' %}
 </head>
+<section>
+    <div class="hero-section">
+        <div class="hero-image">
+            <img class="image" src="{% static 'images/hero_image.svg' %}" alt="">
+        </div>
+    </div>
+</section>
 
 
 
