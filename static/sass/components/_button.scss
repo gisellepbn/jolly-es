@@ -1,0 +1,16 @@
+@use '../abstracts/abstracts' as *;
+
+.btn {
+	padding: 0.5rem $small;
+	background-color: $secondary-color;
+	color: $white-color;
+	border-radius: $border-radius;
+	width: fit-content;
+	transition: 0.4s;
+
+	&:hover {
+		background-color: transparent;
+		outline: 1px solid $secondary-color;
+		color: $secondary-color;
+	}
+}

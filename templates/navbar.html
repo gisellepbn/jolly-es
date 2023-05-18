@@ -1,0 +1,39 @@
+<nav class="navbar">
+
+    {% if request.user.is_authenticated %}
+    <a class="navbar-logo" href="">jolly</a>
+    {% else %}
+    <a class="navbar-logo" href="{% url 'index' %}">jolly</a>
+    {% endif %}
+
+    <div class="menu-icon">
+        <span id="bar-1" class="bar"></span>
+        <span id="bar-2" class="bar"></span>
+        <span id="bar-3" class="bar"></span>
+    </div>
+
+    <div class="menu hidden">
+        <ul class="menu-items">
+            <li class="menu-item"><a class="menu-link link" href="">Join Quiz</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="menu-item"><a class="menu-link link" href="">Log Out</a></li>
+            {% else %}
+            <li class="menu-item"><a class="menu-link link" href="">Sign Up</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+
+    <div class="navbar-menu hidden">
+        <ul class="navbar-items">
+
+            <li class="navbar-item"><a class="link" href="">Join Quiz</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="navbar-item"><a class="link" href="">Log Out</a></li>
+            {% else %}
+            <li class="navbar-item"><a class="btn" href="">Sign Up</a></li>
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
