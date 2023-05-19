@@ -10,7 +10,10 @@ class UserForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ['name', 'username', 'password', 'account_color']
+        fields = ['name', 'username', 'password']
+        labels = {
+            'name': '', 'username':'', 'password':'',
+        }
 
         help_texts = {
             "username": None,

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Sign Up</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="grid">
+    {% include 'navbar.html' %}
+
+    <div class="wrapper">
+        <section class="header-section">
+
+            <div class="header">
+                <h3 class="title">Quiz your Brain!</h3>
+                <p class="subtitle">Learn the fun way</p>
+            </div>
+
+        </section>
+
+        <form class="form" action="" method='post'>
+            {% include 'alerts.html' %}
+            {% csrf_token %}
+            {{form}}
+            <a class="redirect-link link" href="{% url 'index' %}">Already have an account</a>
+            <input class="btn submit-btn" type="submit" name="register" value="Sign up">
+        </form>
+
+    </div>
+
+    {% include 'footer.html' %}
+</div>
+
+{% endblock %}

@@ -18,7 +18,7 @@
             {% if request.user.is_authenticated %}
             <li class="menu-item"><a class="menu-link link" href="">Log Out</a></li>
             {% else %}
-            <li class="menu-item"><a class="menu-link link" href="">Sign Up</a></li>
+            <li class="menu-item"><a class="menu-link link" href="{% url 'register' %}">Sign Up</a></li>
             {% endif %}
 
         </ul>
@@ -31,7 +31,7 @@
             {% if request.user.is_authenticated %}
             <li class="navbar-item"><a class="link" href="">Log Out</a></li>
             {% else %}
-            <li class="navbar-item"><a class="btn" href="">Sign Up</a></li>
+            <li class="navbar-item"><a class="btn" href="{% url 'register' %}">Sign Up</a></li>
             {% endif %}
 
         </ul>
