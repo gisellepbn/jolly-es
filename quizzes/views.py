@@ -77,7 +77,10 @@ def register(request):
         'form': form
     })
 
-
+@login_required(login_url='index')
+def logout_view(request):
+     logout(request)
+     return redirect("index")
 
 @login_required(login_url='index')
 def account(request):
