@@ -58,6 +58,7 @@
 				padding: 0.6rem;
 				width: 100%;
 				background-color: $base-color;
+				transition: all 0.2s;
 
 				&:hover {
 					background-color: $secondary-color;

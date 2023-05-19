@@ -18,3 +18,27 @@
 		}
 	}
 }
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: $big;
+
+	.header {
+		display: flex;
+		flex-direction: column;
+
+		.title {
+			color: $secondary-color;
+			font-weight: $font-bold;
+			font-size: $medium;
+		}
+
+		.subtitle {
+			margin-top: 0.5rem;
+			font-size: 1.2rem;
+		}
+	}
+}

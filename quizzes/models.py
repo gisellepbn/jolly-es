@@ -13,7 +13,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.name
-    
 
 
 class Quiz(models.Model):

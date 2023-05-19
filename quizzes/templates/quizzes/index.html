@@ -6,17 +6,39 @@
 
 {% block content %}
 
-<head>
-    {% include 'navbar.html' %}
-</head>
-<section>
-    <div class="hero-section">
-        <div class="hero-image">
-            <img class="image" src="{% static 'images/hero_image.svg' %}" alt="">
-        </div>
-    </div>
-</section>
+<div class="grid">
 
+    <head>
+        {% include 'navbar.html' %}
+    </head>
+    <section>
+        <div class="hero-section">
+            <div class="hero-image">
+                <img class="image" src="{% static 'images/hero_image.svg' %}" alt="">
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="header">
+                <h3 class="title">Quiz your Brain!</h3>
+                <p class="subtitle">Learn the fun way</p>
+            </div>
+
+
+            <form class="form" action="" method='post'>
+                {% include 'alerts.html' %}
+                {% csrf_token %}
+                {{form.username}}
+                {{form.password}}
+                <input class="btn submit-btn" type="submit" value="Log in">
+            </form>
+
+        </div>
+    </section>
+
+    {% include 'footer.html' %}
+</div>
 
 
 {% endblock %}
