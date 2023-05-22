@@ -1,0 +1,14 @@
+@use '../abstracts/abstracts' as *;
+
+#join-container {
+	background-color: $primary-color;
+	justify-content: center;
+
+	h3 {
+		font-size: $medium;
+	}
+
+	#join-form {
+		padding-top: $medium;
+	}
+}

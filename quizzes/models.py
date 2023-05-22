@@ -40,7 +40,7 @@ class Participant(models.Model):
                           primary_key=True, unique=True, editable=False)
     name = models.CharField(max_length=100)
     account_color = models.CharField(max_length=6, unique=True)
-    quizzes = models.ManyToManyField(Quiz)
+    quizzes = models.ManyToManyField(Quiz, default=None)
     user_id = models.UUIDField(User.id, blank=True, null=True)
     joined = models.DateTimeField(auto_now_add=True, editable=False)
 

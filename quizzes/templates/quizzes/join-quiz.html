@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Join Quiz</title>
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="grid">
+    {% include 'navbar.html' %}
+    <div id="join-container" class="wrapper">
+        <h3>Live Quiz</h3>
+        <form id="join-form" action="" class="form" method="post">
+            {% include 'alerts.html' %}
+            {% csrf_token %}
+            <input type="text" class="input" placeholder="Name" name="name" required>
+            <input type="text" class="input" placeholder="Enter PIN" name="pin" required>
+            <input type="submit" class="submit-btn btn" value="Join Quiz" name="submit">
+        </form>
+    </div>
+    {% include 'footer.html' %}
+</div>
+
+{% endblock content %}

@@ -429,4 +429,15 @@ p {
   background-color: #dbe2ef;
 }
 
+#join-container {
+  background-color: #dbe2ef;
+  justify-content: center;
+}
+#join-container h3 {
+  font-size: 1.5rem;
+}
+#join-container #join-form {
+  padding-top: 1.5rem;
+}
+
 /*# sourceMappingURL=styles.css.map */

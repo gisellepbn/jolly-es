@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
@@ -119,3 +120,48 @@ def account(request, search_option='all'):
         'option': search_option,
         'search_query': search_query
     })
+
+
+def join_quiz(request):
+
+    if request.method == 'POST':
+
+        name = request.POST['name']
+        pin = request.POST['pin']
+        quiz = None
+
+        try:
+            quiz = Quiz.objects.get(pin=pin)
+        except (Quiz.DoesNotExist, ValueError):
+            messages.error(request, 'Invalid PIN')
+
+        if quiz:
+
+            color = hex(random.randrange(0, 2**24))
+            account_color = "#" + color[2:]
+
+            participant = Participant(
+                name=name, account_color=account_color)
+            participant.save()
+            participant.quizzes.add(quiz)
+
+            if request.user.is_authenticated:
+                user_id = request.user.id
+                participant.user_id = user_id
+
+            participant.save()
+            return redirect('live_quiz', pin, participant.id)
+
+    return render(request, 'quizzes/join-quiz.html')
+
+
+def live_quiz(request, pin, participant_id):
+
+    try:
+        quiz = Quiz.objects.get(pin=pin)
+        participant = Participant.objects.get(id=participant_id)
+    except (Quiz.DoesNotExist, Participant.DoesNotExist):
+        return HttpResponse('Invalid Request', content_type='text/plain')
+
+    if quiz and participant:
+        return render(request, 'quizzes/live-quiz.html')
