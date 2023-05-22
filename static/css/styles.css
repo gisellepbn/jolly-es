@@ -400,22 +400,30 @@ p {
 }
 .search .results .quiz {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   width: 100%;
+  justify-content: space-between;
   padding: 1rem;
   background-color: #f9f7f7;
   border: 1px solid #dbe2ef;
   border-radius: 2px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
-.search .results .quiz-name {
+.search .results .quiz .left-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.search .results .quiz .left-box-name {
   font-size: 1.4rem;
 }
-.search .results .quiz-host {
+.search .results .quiz .left-box-host {
   font-size: smaller;
-  opacity: 70%;
+  opacity: 80%;
   color: #5f5f5f;
+}
+.search .results .quiz .right-box {
+  width: 10%;
+  text-align: right;
 }
 .search .results .quiz:hover {
   background-color: #dbe2ef;

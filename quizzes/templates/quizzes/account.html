@@ -53,12 +53,21 @@
                 {% for quiz in quizzes  %}
 
                 <div class="quiz">
-                    <a href="" class="quiz-name">{{quiz.name}}</a>
-                    {% if quiz.topic %}
-                    <p class="quiz-topic">{{quiz.topic}}</p>
+                    <div class="left-box">
+                        <a href="" class="quiz-name">{{quiz.name}}</a>
+                        {% if quiz.topic %}
+                        <p class="quiz-topic">{{quiz.topic}}</p>
+                        {% endif %}
+                        <p class="quiz-host">created by {{quiz.host.username}}</p>
+                    </div>
+
+                    {% if quiz.host == user %}
+                    <div class="right-box">
+                        <a href="" class="edit-quiz" title="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
                     {% endif %}
-                    <p class="quiz-host">created by {{quiz.host.username}}</p>
                 </div>
+
 
                 {% endfor %}
             </div>
