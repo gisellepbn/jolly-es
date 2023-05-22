@@ -1,0 +1,99 @@
+@use '../abstracts/abstracts' as *;
+
+.account-header {
+	background-color: $secondary-color;
+	width: 80%;
+	height: fit-content;
+	padding: $medium;
+	border-radius: $border-radius;
+	margin: $small auto $medium;
+
+	.account-title {
+		color: $white-color;
+		text-align: center;
+		font-size: $medium;
+
+		.underline {
+			position: relative;
+		}
+
+		.underline::after {
+			content: '';
+			width: 100%;
+			height: 3px;
+			background-color: $complementary-color;
+			position: absolute;
+			left: 0;
+			bottom: -4px;
+			transition: all 0.2s;
+			pointer-events: none;
+		}
+	}
+}
+
+.search {
+	width: 80%;
+	height: fit-content;
+	margin-bottom: $small;
+
+	.content-title {
+		text-align: left;
+		padding-left: $small;
+		margin-bottom: $small;
+	}
+
+	&-form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		width: 100%;
+		height: fit-content;
+		position: relative;
+
+		.search-field {
+			i {
+				position: absolute;
+				right: 0;
+				padding: 0.5rem $small;
+				color: $primary-color;
+			}
+		}
+	}
+
+	.results {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.2rem;
+		padding: $small 0 3rem;
+		margin-top: 0.5rem;
+		border-radius: $border-radius;
+
+		.quiz {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			width: 100%;
+			padding: $small;
+			background-color: $base-color;
+			border: 1px solid $primary-color;
+			border-radius: $border-radius;
+			box-shadow: $box-shadow;
+
+			&-name {
+				font-size: 1.4rem;
+			}
+
+			&-host {
+				font-size: smaller;
+				opacity: 70%;
+				color: $text-color;
+			}
+
+			&:hover {
+				background-color: $primary-color;
+			}
+		}
+	}
+}

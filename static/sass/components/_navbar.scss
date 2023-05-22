@@ -6,12 +6,8 @@
 	align-items: center;
 	width: 100vw;
 	height: 5vh;
-	padding: $medium;
+	padding: $medium 5%;
 	background-color: $primary-color;
-
-	@media screen and (min-width: $breakpoint-mobile) {
-		padding: $medium $big;
-	}
 
 	&-logo {
 		font-weight: $font-bold;

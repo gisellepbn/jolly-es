@@ -1,0 +1,12 @@
+@use '../abstracts/abstracts' as *;
+
+.input {
+	padding: 0.5rem $small;
+	outline: 1px solid $primary-color;
+	border: none;
+	width: 100%;
+
+	&:focus {
+		outline: 1px solid $secondary-color;
+	}
+}

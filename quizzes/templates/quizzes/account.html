@@ -8,9 +8,66 @@
 <div class="grid">
     {% include 'navbar.html' %}
 
-    <div class="wrapper"></div>
+    <div class="wrapper">
+        <div class="account-header">
+            <h1 class="account-title">Welcome, <span class="underline">{{user.name}}</span>!</h1>
+        </div>
 
-    {% include 'footer.html' %}
+
+        <div class="search">
+
+
+            <h3 class="content-title">Quizzes</h3>
+
+            <form class="search-form" action="" method='get'>
+                {% include 'alerts.html' %}
+                {% csrf_token %}
+                <select class="input" name="search-options" id="quiz-search-options">
+                    <option selected disabled>Select option</option>
+                    {% if option == 'all' %}
+                    <option value="all" selected>All quizzes</option>
+                    {% else %}
+                    <option value="all">All quizzes</option>
+                    {% endif %}
+                    {% if option == 'host' %}
+                    <option value="host" selected>My quizzes as a host</option>
+                    {% else %}
+                    <option value="host">My quizzes as a host</option>
+                    {% endif %}
+                    {% if option == 'participant' %}
+                    <option value="participant" selected>My quizzes as a participant</option>
+                    {% else %}
+                    <option value="participant">My quizzes as a participant</option>
+                    {% endif %}
+                </select>
+                <div class="search-field">
+                    <i class="fas fa-search"></i>
+                    <input id="search_query" class="input" type="text" placeholder="Search quiz ..." name="search_query"
+                        value="{{search_query}}">
+                </div>
+            </form>
+
+
+
+            <div class="results">
+                {% for quiz in quizzes  %}
+
+                <div class="quiz">
+                    <a href="" class="quiz-name">{{quiz.name}}</a>
+                    {% if quiz.topic %}
+                    <p class="quiz-topic">{{quiz.topic}}</p>
+                    {% endif %}
+                    <p class="quiz-host">created by {{quiz.host.username}}</p>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% include 'footer.html' %}
 </div>
 
 
