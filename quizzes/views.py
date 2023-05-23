@@ -126,7 +126,11 @@ def join_quiz(request):
 
     if request.method == 'POST':
 
-        name = request.POST['name']
+        if request.user.is_authenticated:
+            name = request.user.name
+        else:
+            name = request.POST['name']
+
         pin = request.POST['pin']
         quiz = None
 
@@ -164,4 +168,7 @@ def live_quiz(request, pin, participant_id):
         return HttpResponse('Invalid Request', content_type='text/plain')
 
     if quiz and participant:
-        return render(request, 'quizzes/live-quiz.html')
+        return render(request, 'quizzes/live-quiz.html', {
+            'participant': participant,
+            'quiz': quiz
+        })

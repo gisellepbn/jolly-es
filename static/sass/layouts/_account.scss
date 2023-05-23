@@ -12,22 +12,6 @@
 		color: $white-color;
 		text-align: center;
 		font-size: $medium;
-
-		.underline {
-			position: relative;
-		}
-
-		.underline::after {
-			content: '';
-			width: 100%;
-			height: 3px;
-			background-color: $complementary-color;
-			position: absolute;
-			left: 0;
-			bottom: -4px;
-			transition: all 0.2s;
-			pointer-events: none;
-		}
 	}
 }
 
@@ -72,8 +56,6 @@
 
 		.quiz {
 			display: flex;
-			// flex-direction: column;
-			// flex-wrap: wrap;
 			width: 100%;
 			justify-content: space-between;
 			padding: $small;

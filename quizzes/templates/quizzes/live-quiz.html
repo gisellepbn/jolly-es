@@ -6,6 +6,16 @@
 {% block content %}
 <div class="grid">
     {% include 'navbar.html' %}
+    <div id="message" class="wrapper">
+
+        <h1 class="message-title">Welcome, <span class="underline">{{participant.name}}</span>!</h1>
+        <div class="message-body">
+            <p>Live Quiz <span>{{quiz.name}}</span> will start soon.</p>
+            <p>Get ready!</p>
+        </div>
+
+
+    </div>
     {% include 'footer.html' %}
 </div>
 {% endblock content %}

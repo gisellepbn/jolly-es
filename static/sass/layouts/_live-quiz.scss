@@ -1,0 +1,32 @@
+@use '../abstracts/abstracts' as *;
+
+#message {
+	background-color: $secondary-color;
+	padding: $medium 10%;
+	justify-content: center;
+	align-items: flex-start;
+
+	@media screen and (min-width: $breakpoint-mobile) {
+		padding: $medium 25%;
+	}
+
+	@media screen and (min-width: $breakpoint-tablet) {
+		padding: $medium 35%;
+	}
+
+	.message-title {
+		color: $white-color;
+	}
+
+	.message-body {
+		display: flex;
+		flex-direction: column;
+		gap: $small;
+		margin-top: $medium;
+
+		p {
+			color: $white-color;
+			font-size: 1.2rem;
+		}
+	}
+}
