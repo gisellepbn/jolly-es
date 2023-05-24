@@ -1,32 +1,172 @@
 @use '../abstracts/abstracts' as *;
 
-#message {
+#live-quiz {
+	justify-content: center;
 	background-color: $secondary-color;
 	padding: $medium 10%;
-	justify-content: center;
-	align-items: flex-start;
 
-	@media screen and (min-width: $breakpoint-mobile) {
-		padding: $medium 25%;
+	.message {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		@media screen and (min-width: $breakpoint-mobile) {
+			padding: $medium 15%;
+		}
+
+		@media screen and (min-width: $breakpoint-tablet) {
+			padding: $medium 35%;
+		}
+
+		.message-title {
+			color: $white-color;
+		}
+
+		.message-body {
+			display: flex;
+			flex-direction: column;
+			gap: $small;
+			margin-top: $medium;
+
+			p {
+				color: $white-color;
+				font-size: 1.2rem;
+			}
+		}
 	}
 
-	@media screen and (min-width: $breakpoint-tablet) {
-		padding: $medium 35%;
-	}
-
-	.message-title {
-		color: $white-color;
-	}
-
-	.message-body {
+	.live-question {
 		display: flex;
 		flex-direction: column;
 		gap: $small;
-		margin-top: $medium;
+		width: 100%;
+		height: 100%;
 
-		p {
-			color: $white-color;
-			font-size: 1.2rem;
+		@media screen and (min-width: $breakpoint-tablet) {
+			padding: $medium 15%;
 		}
+
+		.question-box {
+			width: 100%;
+			height: fit-content;
+			border: 1px solid $primary-color;
+
+			.question-header {
+				display: flex;
+				justify-content: space-between;
+				padding: 0.5rem $small;
+				background-color: $secondary-color;
+
+				p {
+					color: $white-color;
+				}
+
+				#question-timer {
+					color: $error-color;
+					font-weight: $font-bold;
+				}
+			}
+
+			.question-text {
+				padding: $small;
+				background-color: $white-color;
+			}
+		}
+
+		.question-choices {
+			display: flex;
+			flex-direction: column;
+			gap: $small;
+			margin: $small 0;
+
+			.choice {
+				display: flex;
+				align-items: center;
+				border: 1px solid $primary-color;
+				cursor: pointer;
+
+				&-letter {
+					width: 5%;
+					display: flex;
+					justify-content: center;
+					padding: $small;
+					text-align: center;
+
+					p {
+						color: $white-color;
+					}
+				}
+
+				#choice-a {
+					background-color: $choice-a;
+				}
+
+				#choice-b {
+					background-color: $choice-b;
+				}
+
+				#choice-c {
+					background-color: $choice-c;
+				}
+
+				#choice-d {
+					background-color: $choice-d;
+				}
+
+				&-text {
+					width: 95%;
+					padding: $small;
+					background-color: $white-color;
+				}
+			}
+
+			#a {
+				&:hover {
+					#text-a {
+						background-color: $choice-a;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#b {
+				&:hover {
+					#text-b {
+						background-color: $choice-b;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#c {
+				&:hover {
+					#text-c {
+						background-color: $choice-c;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#d {
+				&:hover {
+					#text-d {
+						background-color: $choice-d;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.message-hidden {
+		display: none;
 	}
 }

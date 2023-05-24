@@ -13,7 +13,7 @@ class User(AbstractUser):
     joined = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return self.name
+        return self.username
 
 
 class Quiz(models.Model):
@@ -63,7 +63,8 @@ class Question(models.Model):
     choice_D = models.CharField(max_length=100)
     answer_key = models.CharField(max_length=1)
     points = models.PositiveIntegerField(default=1)
-    time = models.TimeField()
+    seconds = models.PositiveIntegerField(
+        default=5, validators=[MinValueValidator(5), MaxValueValidator(180)])
     is_active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
@@ -81,12 +82,29 @@ class Answer(models.Model):
     participant = models.ForeignKey(Participant, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_key = models.CharField(max_length=1)
-    time = models.TimeField()
+    seconds = models.PositiveIntegerField()
     score = models.PositiveIntegerField(default=0)
     submitted = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
-        ordering = ['time']
+        ordering = ['seconds']
 
     def __str__(self):
-        return self.answer_key
+        return f'answer: {self.answer_key}'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "participant": {
+                "id": self.participant.id,
+                "name": self.participant.name,
+                "account_color": self.participant.account_color,
+                "user_id": self.participant.user_id,
+                "joined": self.participant.joined.strftime("%b %d %Y, %I:%M %p")
+            },
+            "question": self.question.id,
+            "answer_key": self.answer_key,
+            "seconds": self.seconds,
+            "score": self.score,
+            "submitted": self.submitted.strftime("%b %d %Y, %I:%M %p")
+        }

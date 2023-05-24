@@ -34,6 +34,7 @@ li {
 
 .underline {
 	position: relative;
+	display: inline-block;
 }
 
 .underline::after {

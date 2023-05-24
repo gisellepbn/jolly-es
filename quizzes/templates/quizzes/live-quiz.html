@@ -6,15 +6,63 @@
 {% block content %}
 <div class="grid">
     {% include 'navbar.html' %}
-    <div id="message" class="wrapper">
-
-        <h1 class="message-title">Welcome, <span class="underline">{{participant.name}}</span>!</h1>
-        <div class="message-body">
-            <p>Live Quiz <span>{{quiz.name}}</span> will start soon.</p>
-            <p>Get ready!</p>
+    <div id="live-quiz" class="wrapper">
+        <div class="message">
+            <h1 class="message-title">Hello, <span id="participant-name" class="underline">{{participant.name}}</span>
+            </h1>
+            <div class="message-body">
+                <p>Your <span>{{quiz.name}}</span> question is coming soon.</p>
+                <p>Get ready!</p>
+            </div>
         </div>
 
-
+        <div class="live-question hidden" data-question="{{question.id}}" data-pin="{{quiz.pin}}"
+            data-participant="{{participant.id}}">
+            <h3>Live Quiz: {{quiz.name}}</h3>
+            <div class="question-box">
+                <div class="question-header">
+                    <p>Question 1</p>
+                    <p id="question-timer" data-time="{{question.seconds}}">{{question.seconds}} <span>sec</span></p>
+                </div>
+                <div class="question-text">
+                    <p>{{question.question}}</p>
+                </div>
+            </div>
+            <div class="question-choices">
+                <div id="a" class="choice">
+                    <div id="choice-a" class="choice-letter">
+                        <p>A</p>
+                    </div>
+                    <div id="text-a" class="choice-text">
+                        <p>{{question.choice_A}}</p>
+                    </div>
+                </div>
+                <div id="b" class="choice">
+                    <div id="choice-b" class="choice-letter">
+                        <p>B</p>
+                    </div>
+                    <div id="text-b" class="choice-text">
+                        <p>{{question.choice_B}}</p>
+                    </div>
+                </div>
+                <div id="c" class="choice">
+                    <div id="choice-c" class="choice-letter">
+                        <p>C</p>
+                    </div>
+                    <div id="text-c" class="choice-text">
+                        <p>{{question.choice_C}}</p>
+                    </div>
+                </div>
+                <div id="d" class="choice">
+                    <div id="choice-d" class="choice-letter">
+                        <p>D</p>
+                    </div>
+                    <div id="text-d" class="choice-text">
+                        <p>{{question.choice_D}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     {% include 'footer.html' %}
 </div>

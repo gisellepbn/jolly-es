@@ -7,7 +7,9 @@ from .forms import UserForm
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 import random
-from .models import Quiz, Participant
+from .models import Quiz, Participant, Question, Answer
+from django.http import JsonResponse
+import json
 
 
 def index(request):
@@ -57,7 +59,7 @@ def register(request):
             # Convert that number from base-10 (decimal) to base-16 (hexadecimal)
             hex_color = hex(account_color)
 
-            account_color = "#" + hex_color[2:]
+            account_color = hex_color[2:]
             user.account_color = account_color
 
             user.save()
@@ -142,7 +144,7 @@ def join_quiz(request):
         if quiz:
 
             color = hex(random.randrange(0, 2**24))
-            account_color = "#" + color[2:]
+            account_color = color[2:]
 
             participant = Participant(
                 name=name, account_color=account_color)
@@ -168,7 +170,32 @@ def live_quiz(request, pin, participant_id):
         return HttpResponse('Invalid Request', content_type='text/plain')
 
     if quiz and participant:
-        return render(request, 'quizzes/live-quiz.html', {
-            'participant': participant,
-            'quiz': quiz
-        })
+
+        try:
+            question = Question.objects.get(quiz=quiz, is_active=True)
+        except Question.DoesNotExist:
+            question = None
+
+        if request.method == 'POST':
+
+            data = json.loads(request.body)
+
+            key = data.get('answer')
+            countdown = data.get('seconds')
+            seconds = question.seconds - countdown
+
+            if key.lower() == question.answer_key.lower():
+                score = int(
+                    (question.points*countdown)/question.seconds)
+            else:
+                score = 0
+
+            answer = Answer(participant=participant, question=question,
+                            answer_key=key, seconds=seconds, score=score)
+            answer.save()
+
+    return render(request, 'quizzes/live-quiz.html', {
+        'participant': participant,
+        'quiz': quiz,
+        'question': question
+    })
