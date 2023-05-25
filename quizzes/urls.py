@@ -10,5 +10,7 @@ urlpatterns = [
     path('join', views.join_quiz, name='join_quiz'),
     path('live-quiz/<int:pin>/<uuid:participant_id>',
          views.live_quiz, name='live_quiz'),
+    path('create-quiz', views.create_quiz, name='create_quiz'),
+    path('edit-quiz/<uuid:id>', views.edit_quiz, name='edit_quiz'),
 
 ]

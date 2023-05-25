@@ -6,7 +6,8 @@
 	border: none;
 	width: 100%;
 
-	&:focus {
+	&:focus,
+	&:hover {
 		outline: 1px solid $secondary-color;
 	}
 }

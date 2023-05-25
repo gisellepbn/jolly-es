@@ -11,6 +11,11 @@
 
 	&-logo {
 		font-weight: $font-bold;
+		transition: transform 1s;
+
+		&:hover {
+			transform: scale(1.1);
+		}
 	}
 
 	.menu-icon {

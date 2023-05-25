@@ -3,13 +3,14 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
-from .forms import UserForm
+from .forms import UserForm, QuizForm
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
 import random
 from .models import Quiz, Participant, Question, Answer
 from django.http import JsonResponse
 import json
+from django.db.utils import IntegrityError
+from .utils import validate_pin
 
 
 def index(request):
@@ -199,3 +200,38 @@ def live_quiz(request, pin, participant_id):
         'quiz': quiz,
         'question': question
     })
+
+
+@login_required(login_url='index')
+def create_quiz(request):
+
+    if request.method == 'POST':
+
+        form = QuizForm(request.POST)
+
+        if form.is_valid():
+
+            quiz = form.save(commit=False)
+            quiz.host = request.user
+
+            while True:
+                try:
+                    quiz.pin = random.randint(1000, 9999)
+                    quiz.save()
+                    break
+                except IntegrityError:
+                    print('UNIQUE constraint failed: quizzes_quiz.pin')
+
+            return redirect('edit_quiz', quiz.id)
+
+    else:
+        form = QuizForm()
+
+    return render(request, 'quizzes/create-quiz.html', {
+        'form': form
+    })
+
+
+@login_required(login_url='index')
+def edit_quiz(request, id):
+    return render(request, 'quizzes/edit-quiz.html')

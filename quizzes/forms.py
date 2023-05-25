@@ -1,4 +1,4 @@
-from .models import User, Participant
+from .models import User, Quiz
 from django.forms import ModelForm, PasswordInput
 
 
@@ -28,3 +28,20 @@ class UserForm(ModelForm):
             {'class': 'input', 'placeholder': 'Username', 'name': 'username'})
         self.fields['password'].widget.attrs.update(
             {'class': 'input', 'placeholder': 'Password', 'name': 'password'})
+
+
+class QuizForm(ModelForm):
+
+    class Meta:
+        model = Quiz
+        fields = ['name', 'topic']
+        labels = {'name': '', 'topic': ''}
+
+    def __init__(self, *args, **kwargs):
+        super(QuizForm, self).__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs.update(
+            {'class': 'input', 'placeholder': 'Quiz Name', 'name': 'name'})
+
+        self.fields['topic'].widget.attrs.update(
+            {'class': 'input', 'placeholder': 'Topic', 'name': 'topic'})

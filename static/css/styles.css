@@ -108,6 +108,10 @@ p {
 }
 .navbar-logo {
   font-weight: 700;
+  transition: transform 1s;
+}
+.navbar-logo:hover {
+  transform: scale(1.1);
 }
 .navbar .menu-icon {
   width: 25px;
@@ -246,14 +250,13 @@ p {
   border: none;
   width: 100%;
 }
-.input:focus {
+.input:focus, .input:hover {
   outline: 1px solid #3f72af;
 }
 
 .footer {
   width: 100vw;
   background-color: #dbe2ef;
-  border-radius: 50px 50px 0 0;
   height: 5vh;
   position: fixed;
   bottom: 0;
@@ -315,6 +318,10 @@ p {
 .hero-section .hero-image .image {
   width: 100%;
   height: 100%;
+  transition: transform 2s;
+}
+.hero-section .hero-image .image:hover {
+  transform: scale(1.1);
 }
 
 .container {
@@ -330,6 +337,7 @@ p {
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  background-image: linear-gradient(134deg, rgba(1, 1, 1, 0.02) 0%, rgba(1, 1, 1, 0.02) 16%, transparent 16%, transparent 76%, rgba(58, 58, 58, 0.02) 76%, rgba(58, 58, 58, 0.02) 100%), linear-gradient(215deg, rgba(166, 166, 166, 0.02) 0%, rgba(166, 166, 166, 0.02) 33%, transparent 33%, transparent 79%, rgba(111, 111, 111, 0.02) 79%, rgba(111, 111, 111, 0.02) 100%), linear-gradient(303deg, rgba(215, 215, 215, 0.02) 0%, rgba(215, 215, 215, 0.02) 7%, transparent 7%, transparent 90%, rgba(192, 192, 192, 0.02) 90%, rgba(192, 192, 192, 0.02) 100%), linear-gradient(302deg, rgba(113, 113, 113, 0.02) 0%, rgba(113, 113, 113, 0.02) 34%, transparent 34%, transparent 73%, rgba(65, 65, 65, 0.02) 73%, rgba(65, 65, 65, 0.02) 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
 }
 
 .wrapper {
@@ -420,12 +428,12 @@ p {
   flex-direction: column;
   flex-wrap: wrap;
 }
-.search .results .quiz .left-box-name {
+.search .results .quiz .left-box .quiz-name {
   font-size: 1.4rem;
 }
-.search .results .quiz .left-box-host {
+.search .results .quiz .left-box .quiz-host {
   font-size: smaller;
-  opacity: 80%;
+  opacity: 70%;
   color: #5f5f5f;
 }
 .search .results .quiz .right-box {
@@ -579,6 +587,16 @@ p {
 }
 #live-quiz .message-hidden {
   display: none;
+}
+
+#create-quiz {
+  justify-content: center;
+}
+#create-quiz h3 {
+  font-size: 1.5rem;
+}
+#create-quiz .form {
+  padding-top: 1.5rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

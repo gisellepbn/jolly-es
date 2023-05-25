@@ -69,13 +69,13 @@
 				flex-direction: column;
 				flex-wrap: wrap;
 
-				&-name {
+				.quiz-name {
 					font-size: 1.4rem;
 				}
 
-				&-host {
+				.quiz-host {
 					font-size: smaller;
-					opacity: 80%;
+					opacity: 70%;
 					color: $text-color;
 				}
 			}
