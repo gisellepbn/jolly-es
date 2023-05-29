@@ -3,14 +3,13 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
-from .forms import UserForm, QuizForm
-from django.contrib.auth.decorators import login_required
+from .forms import UserForm, QuizForm, QuestionForm
+from django.contrib.auth.decorators import login_required, user_passes_test
 import random
 from .models import Quiz, Participant, Question, Answer
 from django.http import JsonResponse
 import json
 from django.db.utils import IntegrityError
-from .utils import validate_pin
 
 
 def index(request):
@@ -234,4 +233,79 @@ def create_quiz(request):
 
 @login_required(login_url='index')
 def edit_quiz(request, id):
-    return render(request, 'quizzes/edit-quiz.html')
+
+    quiz = Quiz.objects.get(id=id)
+
+    if quiz.host == request.user:
+
+        questions = Question.objects.filter(quiz=quiz)
+
+        if request.method == 'POST' and 'edit-quiz' in request.POST:
+
+            quiz_form = QuizForm(request.POST, instance=quiz)
+
+            if quiz_form.is_valid():
+                quiz_form.save()
+
+        else:
+            quiz_form = QuizForm(instance=quiz)
+
+        if request.method == 'POST' and 'add-question' in request.POST:
+
+            question_form = QuestionForm(request.POST)
+
+            if question_form.is_valid():
+                question = question_form.save(commit=False)
+                question.quiz = quiz
+                question.save()
+
+                return redirect('edit_quiz', id)
+
+        else:
+            question_form = QuestionForm()
+
+        return render(request, 'quizzes/edit-quiz.html', {
+            'quiz_form': quiz_form,
+            'question_form': question_form,
+            'questions': questions,
+            'quiz': quiz
+        })
+
+
+@login_required(login_url='index')
+def question(request, id):
+
+    question = Question.objects.get(id=id)
+
+    if question.quiz.host == request.user:
+
+        if request.method == 'PUT':
+
+            data = json.loads(request.body)
+
+            question.question = data.get('question_text')
+            question.choice_A = data.get('option_a')
+            question.choice_B = data.get('option_b')
+            question.choice_C = data.get('option_c')
+            question.choice_D = data.get('option_d')
+            question.answer_key = data.get('answer_key')
+            question.points = data.get('points')
+            question.seconds = data.get('seconds')
+            question.save()
+
+        if request.method == 'DELETE':
+
+            question.delete()
+
+        return JsonResponse(question.serialize())
+
+
+@login_required(login_url='index')
+def delete_quiz(request, id):
+
+    quiz = Quiz.objects.get(id=id)
+
+    if quiz.host == request.user:
+        quiz.delete()
+
+        return HttpResponse(status=204)

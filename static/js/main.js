@@ -17,6 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	const choice_c = document.querySelector('#c');
 	const choice_d = document.querySelector('#d');
 
+	// Edit quiz section
+	const questions = document.querySelectorAll('.question');
+	const question_text = document.querySelector('#question');
+	const option_a = document.querySelector('#choice_a');
+	const option_b = document.querySelector('#choice_b');
+	const option_c = document.querySelector('#choice_c');
+	const option_d = document.querySelector('#choice_d');
+	const answer_key = document.querySelector('#answer_key');
+	const points = document.querySelector('#points');
+	const seconds = document.querySelector('#seconds');
+	const reset_question_icon = document.querySelector('#reset-question-form');
+	const question_form = document.querySelector('.question-form');
+	const add_question_btn = document.querySelector('#add-question');
+	const edit_question_btn = document.querySelector('#edit-question');
+	const delete_question_btn = document.querySelector('#delete-question');
+	const delete_quiz_btn = document.querySelector('#delete-quiz');
+	const modal = document.querySelector('.modal');
+	const confirm = document.querySelector('#confirm');
+	const cancel = document.querySelector('#cancel');
+
 	if (live_question) {
 		const question = live_question.dataset.question;
 
@@ -105,6 +125,45 @@ document.addEventListener('DOMContentLoaded', () => {
 		);
 	}
 
+	questions.forEach((selected_question) => {
+		selected_question.addEventListener('click', () => {
+			const question_id = selected_question.dataset.question;
+			question_details(question_id);
+			add_question_btn.classList.add('hidden');
+			edit_question_btn.classList.remove('hidden');
+			delete_question_btn.classList.remove('hidden');
+			edit_question_btn.addEventListener('click', () => {
+				this.preventDefault;
+				edit_question(question_id);
+			});
+			delete_question_btn.addEventListener('click', () => {
+				this.preventDefault;
+				delete_question(question_id);
+			});
+		});
+	});
+
+	reset_question_icon.addEventListener('click', () => {
+		this.preventDefault;
+		question_form.reset();
+		add_question_btn.classList.remove('hidden');
+		edit_question_btn.classList.add('hidden');
+		delete_question_btn.classList.add('hidden');
+	});
+
+	delete_quiz_btn.addEventListener('click', (e) => {
+		e.preventDefault();
+		modal.showModal();
+	});
+
+	cancel.addEventListener('click', () => {
+		modal.close();
+	});
+
+	confirm.addEventListener('click', () => delete_quiz(modal.dataset.quiz));
+
+	// Functions
+
 	function countdown(sec, display) {
 		let countdown = setInterval(() => {
 			if (sec > 0) {
@@ -163,5 +222,54 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 		return cookieValue;
+	}
+
+	function question_details(question) {
+		fetch(`/question/${question}`)
+			.then((response) => response.json())
+			.then((question) => {
+				question_text.value = question.question;
+				option_a.value = question.choice_A;
+				option_b.value = question.choice_B;
+				option_c.value = question.choice_C;
+				option_d.value = question.choice_D;
+				answer_key.value = question.answer_key;
+				points.value = question.points;
+				seconds.value = question.seconds;
+			});
+	}
+
+	function edit_question(question) {
+		fetch(`/question/${question}`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				question_text: question_text.value,
+				option_a: option_a.value,
+				option_b: option_b.value,
+				option_c: option_c.value,
+				option_d: option_d.value,
+				answer_key: answer_key.value,
+				points: points.value,
+				seconds: seconds.value,
+			}),
+			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		});
+	}
+
+	function delete_question(question) {
+		fetch(`/question/${question}`, {
+			method: 'DELETE',
+			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		});
+	}
+
+	function delete_quiz(quiz) {
+		modal.close();
+		fetch(`/delete-quiz/${quiz}`, {
+			method: 'DELETE',
+			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		}).then(() => {
+			document.location.href = '/account/host';
+		});
 	}
 });

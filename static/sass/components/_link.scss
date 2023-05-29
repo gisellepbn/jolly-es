@@ -4,6 +4,10 @@
 	font-weight: $font-regular;
 	position: relative;
 
+	&:hover {
+		color: $text-color;
+	}
+
 	&:hover::after {
 		opacity: 1;
 	}

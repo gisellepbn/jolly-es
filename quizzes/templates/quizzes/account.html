@@ -56,6 +56,7 @@
                     <div class="left-box">
                         {% if quiz.host == user %}
                         <a href="" class="quiz-name">{{quiz.name}}</a>
+                        <p class="quiz-pin">Pin {{quiz.pin}}</p>
                         {% else %}
                         <a href="" class="quiz-name">{{quiz.name}}</a>
                         {% endif %}
@@ -67,7 +68,8 @@
 
                     {% if quiz.host == user %}
                     <div class="right-box">
-                        <a href="" class="edit-quiz" title="edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'edit_quiz' quiz.id %}" class="edit-quiz" title="Edit quiz"><i
+                                class="fa-solid fa-pen-to-square"></i></a>
                     </div>
                     {% endif %}
                 </div>

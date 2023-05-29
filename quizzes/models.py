@@ -53,6 +53,13 @@ class Participant(models.Model):
 
 class Question(models.Model):
 
+    ANSWER_CHOICES = (
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D')
+    )
+
     id = models.UUIDField(default=uuid.uuid4,
                           primary_key=True, unique=True, editable=False)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
@@ -61,7 +68,7 @@ class Question(models.Model):
     choice_B = models.CharField(max_length=100)
     choice_C = models.CharField(max_length=100)
     choice_D = models.CharField(max_length=100)
-    answer_key = models.CharField(max_length=1)
+    answer_key = models.CharField(max_length=1, choices=ANSWER_CHOICES)
     points = models.PositiveIntegerField(default=1)
     seconds = models.PositiveIntegerField(
         default=5, validators=[MinValueValidator(5), MaxValueValidator(180)])
@@ -73,6 +80,19 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "question": self.question,
+            "choice_A": self.choice_A,
+            "choice_B": self.choice_B,
+            "choice_C": self.choice_C,
+            "choice_D": self.choice_D,
+            "answer_key": self.answer_key,
+            "points": self.points,
+            "seconds": self.seconds
+        }
 
 
 class Answer(models.Model):

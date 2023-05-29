@@ -16,3 +16,25 @@
 		color: $secondary-color;
 	}
 }
+
+.cancel-btn {
+	background-color: transparent;
+	color: $secondary-color;
+	outline: 1px solid $secondary-color;
+
+	&:hover {
+		background-color: $secondary-color;
+		color: $white-color;
+	}
+}
+
+.confirm-btn {
+	background-color: $error-color;
+	outline: 1px solid $error-color;
+
+	&:hover {
+		background-color: transparent;
+		color: $error-color;
+		outline: 1px solid $error-color;
+	}
+}
