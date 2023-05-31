@@ -293,11 +293,14 @@ def question(request, id):
             question.seconds = data.get('seconds')
             question.save()
 
-        if request.method == 'DELETE':
+            return HttpResponse(status=204)
 
+        elif request.method == 'DELETE':
             question.delete()
+            return HttpResponse(status=204)
 
-        return JsonResponse(question.serialize())
+        else:
+            return JsonResponse(question.serialize())
 
 
 @login_required(login_url='index')
@@ -309,3 +312,21 @@ def delete_quiz(request, id):
         quiz.delete()
 
         return HttpResponse(status=204)
+
+
+@login_required(login_url='index')
+def start_quiz(request, id):
+
+    quiz = Quiz.objects.get(id=id)
+
+    if quiz.host == request.user:
+
+        questions = Question.objects.filter(quiz=quiz)
+
+        num_participants = quiz.participant_set.count()
+
+        return render(request, 'quizzes/start-quiz.html', {
+            'questions': questions,
+            'quiz': quiz,
+            'num_participants': num_participants
+        })

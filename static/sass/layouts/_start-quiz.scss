@@ -1,0 +1,180 @@
+@use '../abstracts/abstracts' as *;
+
+#start-quiz {
+	gap: $medium;
+	padding: $medium 0;
+
+	.questions-panel {
+		display: flex;
+		flex-direction: column;
+		gap: $small;
+		width: 90%;
+
+		.questions {
+			max-height: 500px;
+			overflow-y: auto;
+			padding: 0.5rem;
+
+			.start-question {
+				margin-bottom: 0.5rem;
+				border-radius: $border-radius;
+				padding: $small;
+				box-shadow: $box-shadow;
+				cursor: pointer;
+
+				&:hover {
+					background-color: $primary-color;
+				}
+
+				&-text {
+					line-height: $line-height;
+				}
+			}
+		}
+	}
+
+	.active-question {
+		display: flex;
+		flex-direction: column;
+		gap: $small;
+		width: 90%;
+		height: 100%;
+
+		@media screen and (min-width: $breakpoint-tablet) {
+			padding: $medium;
+		}
+
+		.question-box {
+			width: 100%;
+			height: fit-content;
+			border: 1px solid $primary-color;
+
+			.question-header {
+				display: flex;
+				justify-content: space-between;
+				padding: 0.5rem $small;
+				background-color: $secondary-color;
+
+				p {
+					color: $white-color;
+				}
+
+				#question-timer {
+					color: $error-color;
+					font-weight: $font-bold;
+				}
+			}
+
+			.question-text {
+				padding: $small;
+				background-color: $white-color;
+			}
+		}
+
+		.question-choices {
+			display: flex;
+			flex-direction: column;
+			gap: $small;
+
+			.choice {
+				display: flex;
+				align-items: center;
+				border: 1px solid $primary-color;
+				cursor: pointer;
+
+				&-letter {
+					width: 5%;
+					display: flex;
+					justify-content: center;
+					padding: $small;
+					text-align: center;
+
+					p {
+						color: $white-color;
+					}
+				}
+
+				#choice-a {
+					background-color: $choice-a;
+				}
+
+				#choice-b {
+					background-color: $choice-b;
+				}
+
+				#choice-c {
+					background-color: $choice-c;
+				}
+
+				#choice-d {
+					background-color: $choice-d;
+				}
+
+				&-text {
+					width: 95%;
+					height: 100%;
+					padding: $small;
+					background-color: $white-color;
+				}
+			}
+
+			#a {
+				&:hover {
+					#text-a {
+						background-color: $choice-a;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#b {
+				&:hover {
+					#text-b {
+						background-color: $choice-b;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#c {
+				&:hover {
+					#text-c {
+						background-color: $choice-c;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+
+			#d {
+				&:hover {
+					#text-d {
+						background-color: $choice-d;
+						p {
+							color: $white-color;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: $breakpoint-tablet) {
+		flex-direction: row;
+		justify-content: center;
+		align-items: flex-start;
+
+		.questions-panel {
+			width: 30%;
+		}
+
+		.active-question {
+			width: 40%;
+		}
+	}
+}

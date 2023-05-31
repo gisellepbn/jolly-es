@@ -66,13 +66,13 @@
                 {{question_form.answer_key}}
                 <label for="points">Points</label>
                 {{question_form.points}}
-                <label for="seconds">Seconds</label>
+                <label for="seconds">Time limit in seconds</label>
                 {{question_form.seconds}}
 
                 <div class="cta-btns">
                     <input id="add-question" type="submit" class="btn" value='Add Question' name="add-question">
-                    <input id="edit-question" type="submit" class="btn hidden" value='Update' name="edit-question">
-                    <input id="delete-question" type="submit" class="btn hidden" value='Delete' name="delete-question">
+                    <button id="edit-question" class="btn hidden" data-question>Update</button>
+                    <button id="delete-question" class="btn hidden" data-question>Delete</button>
                 </div>
 
 

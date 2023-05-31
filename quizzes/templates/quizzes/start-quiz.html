@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Start Quiz</title>
+{% endblock title %}
+
+{% block content %}
+
+<div class="grid">
+
+    {% include 'navbar.html' %}
+
+    <div id="start-quiz" class="wrapper">
+
+        <div class="questions-panel">
+
+            <h2>{{quiz.name}} - Pin {{quiz.pin}}</h2>
+            <h3>Choose a question to go live</h3>
+            <div class="questions">
+                {% for question in questions  %}
+                <div class="start-question" data-question="{{question.id}}">
+                    <p class="start-question-text">{{question}}</p>
+                </div>
+                {% empty %}
+                <p>No questions yet</p>
+                {% endfor %}
+            </div>
+
+
+
+
+        </div>
+
+        <div class="active-question">
+            <h3>Live Participants: {{num_participants}}</h3>
+            <div class="question-box">
+                <div class="question-header">
+                    <p>Question <span id="question-number">#</span></p>
+                    <p id="time-limit" data-time="{{question.seconds}}">Time</p>
+                </div>
+                <div class="question-text">
+                    <p id="start-q-text">{{question.question}}</p>
+                </div>
+            </div>
+            <div class="question-choices">
+                <div id="a" class="choice">
+                    <div id="choice-a" class="choice-letter">
+                        <p>A</p>
+                    </div>
+                    <div id="text-a" class="choice-text">
+                        <p id="start-text-a" data-letter='A'>{{question.choice_A}}</p>
+                    </div>
+                </div>
+                <div id="b" class="choice">
+                    <div id="choice-b" class="choice-letter">
+                        <p>B</p>
+                    </div>
+                    <div id="text-b" class="choice-text">
+                        <p id="start-text-b" data-letter='B'>{{question.choice_B}}</p>
+                    </div>
+                </div>
+                <div id="c" class="choice">
+                    <div id="choice-c" class="choice-letter">
+                        <p>C</p>
+                    </div>
+                    <div id="text-c" class="choice-text">
+                        <p id="start-text-c" data-letter='C'>{{question.choice_C}}</p>
+                    </div>
+                </div>
+                <div id="d" class="choice">
+                    <div id="choice-d" class="choice-letter">
+                        <p>D</p>
+                    </div>
+                    <div id="text-d" class="choice-text">
+                        <p id="start-text-d" data-letter='D'>{{question.choice_D}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-section">
+                <button class="btn submit-btn">Send Question</button>
+                <button class="btn submit-btn">End Quiz</button>
+                <button class="btn submit-btn">Scoreboard</button>
+            </div>
+
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+
+</div>
+
+{% endblock content %}

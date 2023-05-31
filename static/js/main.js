@@ -37,6 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const confirm = document.querySelector('#confirm');
 	const cancel = document.querySelector('#cancel');
 
+	// Start quiz section
+	const start_questions = document.querySelectorAll('.start-question');
+	const start_question_text = document.querySelector('#start-q-text');
+	const start_text_a = document.querySelector('#start-text-a');
+	const start_text_b = document.querySelector('#start-text-b');
+	const start_text_c = document.querySelector('#start-text-c');
+	const start_text_d = document.querySelector('#start-text-d');
+	const time_limit = document.querySelector('#time-limit');
+
 	if (live_question) {
 		const question = live_question.dataset.question;
 
@@ -129,38 +138,61 @@ document.addEventListener('DOMContentLoaded', () => {
 		selected_question.addEventListener('click', () => {
 			const question_id = selected_question.dataset.question;
 			question_details(question_id);
+			edit_question_btn.dataset.question = question_id;
+			delete_question_btn.dataset.question = question_id;
+
 			add_question_btn.classList.add('hidden');
 			edit_question_btn.classList.remove('hidden');
 			delete_question_btn.classList.remove('hidden');
-			edit_question_btn.addEventListener('click', () => {
-				this.preventDefault;
-				edit_question(question_id);
-			});
-			delete_question_btn.addEventListener('click', () => {
-				this.preventDefault;
-				delete_question(question_id);
-			});
 		});
 	});
 
-	reset_question_icon.addEventListener('click', () => {
-		this.preventDefault;
-		question_form.reset();
-		add_question_btn.classList.remove('hidden');
-		edit_question_btn.classList.add('hidden');
-		delete_question_btn.classList.add('hidden');
-	});
-
-	delete_quiz_btn.addEventListener('click', (e) => {
+	edit_question_btn.addEventListener('click', (e) => {
 		e.preventDefault();
-		modal.showModal();
+		const question_id = edit_question_btn.dataset.question;
+		edit_question(question_id);
 	});
 
-	cancel.addEventListener('click', () => {
-		modal.close();
+	delete_question_btn.addEventListener('click', (e) => {
+		e.preventDefault();
+		const question_id = delete_question_btn.dataset.question;
+		delete_question(question_id);
 	});
 
-	confirm.addEventListener('click', () => delete_quiz(modal.dataset.quiz));
+	if (reset_question_icon) {
+		reset_question_icon.addEventListener('click', () => {
+			this.preventDefault;
+			question_form.reset();
+			add_question_btn.classList.remove('hidden');
+			edit_question_btn.classList.add('hidden');
+			delete_question_btn.classList.add('hidden');
+		});
+	}
+
+	if (delete_question_btn) {
+		delete_quiz_btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			modal.showModal();
+		});
+	}
+
+	if (cancel) {
+		cancel.addEventListener('click', () => {
+			modal.close();
+		});
+	}
+
+	if (confirm) {
+		confirm.addEventListener('click', () => delete_quiz(modal.dataset.quiz));
+	}
+
+	start_questions.forEach((question) => {
+		question.addEventListener('click', () => {
+			const question_id = question.dataset.question;
+			console.log(question_id);
+			start_question_details(question_id);
+		});
+	});
 
 	// Functions
 
@@ -253,6 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				seconds: seconds.value,
 			}),
 			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		}).then(() => {
+			location.reload();
 		});
 	}
 
@@ -260,6 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		fetch(`/question/${question}`, {
 			method: 'DELETE',
 			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		}).then(() => {
+			location.reload();
 		});
 	}
 
@@ -271,5 +307,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		}).then(() => {
 			document.location.href = '/account/host';
 		});
+	}
+
+	function start_question_details(question) {
+		fetch(`/question/${question}`)
+			.then((response) => response.json())
+			.then((question) => {
+				start_question_text.textContent = question.question;
+				start_text_a.textContent = question.choice_A;
+				start_text_b.textContent = question.choice_B;
+				start_text_c.textContent = question.choice_C;
+				start_text_d.textContent = question.choice_D;
+				time_limit.textContent = question.seconds + ' sec';
+				// answer_key.value = question.answer_key;
+				// points.value = question.points;
+				// seconds.value = question.seconds;
+			});
 	}
 });
