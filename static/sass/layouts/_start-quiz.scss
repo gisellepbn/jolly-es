@@ -3,6 +3,7 @@
 #start-quiz {
 	gap: $medium;
 	padding: $medium 0;
+	overflow-y: scroll;
 
 	.questions-panel {
 		display: flex;
@@ -57,11 +58,17 @@
 
 				p {
 					color: $white-color;
+					font-weight: $font-bold;
 				}
 
-				#question-timer {
-					color: $error-color;
-					font-weight: $font-bold;
+				.right {
+					display: flex;
+					gap: 0.5rem;
+					width: fit-content;
+
+					#time-limit {
+						color: $error-color;
+					}
 				}
 			}
 
@@ -80,14 +87,14 @@
 				display: flex;
 				align-items: center;
 				border: 1px solid $primary-color;
-				cursor: pointer;
 
 				&-letter {
 					width: 5%;
+					height: 100%;
 					display: flex;
 					justify-content: center;
+					align-items: center;
 					padding: $small;
-					text-align: center;
 
 					p {
 						color: $white-color;
@@ -117,48 +124,45 @@
 					background-color: $white-color;
 				}
 			}
+		}
 
-			#a {
+		.cta-section {
+			margin: 0 0 $small;
+
+			button:disabled {
+				// background-color: $base-color;
+				// color: $text-color;
+				cursor: default;
+				opacity: 20%;
+
 				&:hover {
-					#text-a {
-						background-color: $choice-a;
-						p {
-							color: $white-color;
-						}
-					}
+					border: none;
 				}
 			}
 
-			#b {
+			#end-quiz {
+				background-color: $error-color;
+
 				&:hover {
-					#text-b {
-						background-color: $choice-b;
-						p {
-							color: $white-color;
-						}
-					}
+					color: $error-color;
+					background-color: transparent;
+					outline: 1px solid $error-color;
 				}
 			}
 
-			#c {
+			#scoreboard {
+				background-color: $text-color;
+
 				&:hover {
-					#text-c {
-						background-color: $choice-c;
-						p {
-							color: $white-color;
-						}
-					}
+					color: $text-color;
+					background-color: transparent;
+					outline: 1px solid $text-color;
 				}
 			}
 
-			#d {
-				&:hover {
-					#text-d {
-						background-color: $choice-d;
-						p {
-							color: $white-color;
-						}
-					}
+			@media screen and (min-width: $breakpoint-mobile) {
+				button {
+					width: fit-content;
 				}
 			}
 		}

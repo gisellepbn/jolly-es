@@ -238,6 +238,11 @@ p {
   outline: 1px solid #f47c7c;
 }
 
+.submit-btn {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
 .link {
   font-weight: 400;
   position: relative;
@@ -279,10 +284,6 @@ p {
   .form {
     width: 20%;
   }
-}
-.form .submit-btn {
-  width: 100%;
-  margin-top: 0.5rem;
 }
 
 .input {
@@ -809,6 +810,7 @@ p {
 #start-quiz {
   gap: 1.5rem;
   padding: 1.5rem 0;
+  overflow-y: scroll;
 }
 #start-quiz .questions-panel {
   display: flex;
@@ -859,10 +861,15 @@ p {
 }
 #start-quiz .active-question .question-box .question-header p {
   color: #fff;
-}
-#start-quiz .active-question .question-box .question-header #question-timer {
-  color: #f47c7c;
   font-weight: 700;
+}
+#start-quiz .active-question .question-box .question-header .right {
+  display: flex;
+  gap: 0.5rem;
+  width: fit-content;
+}
+#start-quiz .active-question .question-box .question-header .right #time-limit {
+  color: #f47c7c;
 }
 #start-quiz .active-question .question-box .question-text {
   padding: 1rem;
@@ -877,14 +884,14 @@ p {
   display: flex;
   align-items: center;
   border: 1px solid #dbe2ef;
-  cursor: pointer;
 }
 #start-quiz .active-question .question-choices .choice-letter {
   width: 5%;
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 1rem;
-  text-align: center;
 }
 #start-quiz .active-question .question-choices .choice-letter p {
   color: #fff;
@@ -907,29 +914,36 @@ p {
   padding: 1rem;
   background-color: #fff;
 }
-#start-quiz .active-question .question-choices #a:hover #text-a {
-  background-color: #af3f72;
+#start-quiz .active-question .cta-section {
+  margin: 0 0 1rem;
 }
-#start-quiz .active-question .question-choices #a:hover #text-a p {
-  color: #fff;
+#start-quiz .active-question .cta-section button:disabled {
+  cursor: default;
+  opacity: 20%;
 }
-#start-quiz .active-question .question-choices #b:hover #text-b {
-  background-color: #f1a661;
+#start-quiz .active-question .cta-section button:disabled:hover {
+  border: none;
 }
-#start-quiz .active-question .question-choices #b:hover #text-b p {
-  color: #fff;
+#start-quiz .active-question .cta-section #end-quiz {
+  background-color: #f47c7c;
 }
-#start-quiz .active-question .question-choices #c:hover #text-c {
-  background-color: #723faf;
+#start-quiz .active-question .cta-section #end-quiz:hover {
+  color: #f47c7c;
+  background-color: transparent;
+  outline: 1px solid #f47c7c;
 }
-#start-quiz .active-question .question-choices #c:hover #text-c p {
-  color: #fff;
+#start-quiz .active-question .cta-section #scoreboard {
+  background-color: #5f5f5f;
 }
-#start-quiz .active-question .question-choices #d:hover #text-d {
-  background-color: #72af3f;
+#start-quiz .active-question .cta-section #scoreboard:hover {
+  color: #5f5f5f;
+  background-color: transparent;
+  outline: 1px solid #5f5f5f;
 }
-#start-quiz .active-question .question-choices #d:hover #text-d p {
-  color: #fff;
+@media screen and (min-width: 480px) {
+  #start-quiz .active-question .cta-section button {
+    width: fit-content;
+  }
 }
 @media screen and (min-width: 960px) {
   #start-quiz {

@@ -45,6 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const start_text_c = document.querySelector('#start-text-c');
 	const start_text_d = document.querySelector('#start-text-d');
 	const time_limit = document.querySelector('#time-limit');
+	const question_num = document.querySelector('#question-number');
+	const question_points = document.querySelector('#question-points');
+	const send_question = document.querySelector('#send-question');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
@@ -137,6 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	questions.forEach((selected_question) => {
 		selected_question.addEventListener('click', () => {
 			const question_id = selected_question.dataset.question;
+
+			questions.forEach((question) => {
+				question.style.backgroundColor = 'transparent';
+			});
+			selected_question.style.backgroundColor = '#dbe2ef';
+
 			question_details(question_id);
 			edit_question_btn.dataset.question = question_id;
 			delete_question_btn.dataset.question = question_id;
@@ -147,17 +156,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	edit_question_btn.addEventListener('click', (e) => {
-		e.preventDefault();
-		const question_id = edit_question_btn.dataset.question;
-		edit_question(question_id);
-	});
+	if (edit_question_btn) {
+		edit_question_btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const question_id = edit_question_btn.dataset.question;
+			edit_question(question_id);
+		});
+	}
 
-	delete_question_btn.addEventListener('click', (e) => {
-		e.preventDefault();
-		const question_id = delete_question_btn.dataset.question;
-		delete_question(question_id);
-	});
+	if (delete_question_btn) {
+		delete_question_btn.addEventListener('click', (e) => {
+			e.preventDefault();
+			const question_id = delete_question_btn.dataset.question;
+			delete_question(question_id);
+		});
+	}
 
 	if (reset_question_icon) {
 		reset_question_icon.addEventListener('click', () => {
@@ -189,10 +202,35 @@ document.addEventListener('DOMContentLoaded', () => {
 	start_questions.forEach((question) => {
 		question.addEventListener('click', () => {
 			const question_id = question.dataset.question;
-			console.log(question_id);
+			const text_div = document.querySelectorAll('.choice-text');
+
+			start_questions.forEach((question) => {
+				question.style.backgroundColor = 'transparent';
+			});
+			question.style.backgroundColor = '#dbe2ef';
+
+			// Change border of div with correct answer
+			text_div.forEach((div) => {
+				div.style.border = 'none';
+			});
+
+			if (!sessionStorage.getItem('question_counter')) {
+				sessionStorage.setItem('question_counter', 1);
+			}
 			start_question_details(question_id);
+			send_question.dataset.question = question_id;
+			send_question.disabled = false;
 		});
 	});
+
+	if (send_question) {
+		send_question.addEventListener('click', () => {
+			let counter = parseInt(sessionStorage.getItem('question_counter'));
+			sessionStorage.setItem('question_counter', ++counter);
+
+			console.log(sessionStorage.getItem('question_counter'));
+		});
+	}
 
 	// Functions
 
@@ -319,9 +357,18 @@ document.addEventListener('DOMContentLoaded', () => {
 				start_text_c.textContent = question.choice_C;
 				start_text_d.textContent = question.choice_D;
 				time_limit.textContent = question.seconds + ' sec';
-				// answer_key.value = question.answer_key;
-				// points.value = question.points;
-				// seconds.value = question.seconds;
+
+				question_num.textContent = sessionStorage.getItem('question_counter');
+
+				const correct_answer = question.answer_key.toLowerCase();
+
+				const correct_answer_div = document.querySelector(
+					`#text-${correct_answer}`
+				);
+
+				correct_answer_div.style.border = `1px solid ${correct_answer_div.dataset.color}`;
+
+				question_points.textContent = question.points + ' pts';
 			});
 	}
 });
