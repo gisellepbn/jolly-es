@@ -11,7 +11,7 @@
 
 <div class="grid">
 
-    {% include 'navbar.html' %}
+    {% include 'partials/navbar.html' %}
 
     <div id="edit-quiz-layout" class="wrapper">
 
@@ -50,7 +50,7 @@
         </div>
         <div class="box">
             <form action="" class="question-form form" method="post">
-                {% include 'alerts.html' %}
+                {% include 'partials/alerts.html' %}
                 {% csrf_token %}
                 <label for="question">Question</label>
                 {{question_form.question}}
@@ -93,7 +93,7 @@
 
 
 
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 </div>
 
 

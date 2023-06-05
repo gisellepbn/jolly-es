@@ -147,7 +147,7 @@ def join_quiz(request):
             account_color = color[2:]
 
             participant = Participant(
-                name=name, account_color=account_color)
+                name=name, account_color=account_color, is_active=True)
             participant.save()
             participant.quizzes.add(quiz)
 
@@ -283,14 +283,23 @@ def question(request, id):
 
             data = json.loads(request.body)
 
-            question.question = data.get('question_text')
-            question.choice_A = data.get('option_a')
-            question.choice_B = data.get('option_b')
-            question.choice_C = data.get('option_c')
-            question.choice_D = data.get('option_d')
-            question.answer_key = data.get('answer_key')
-            question.points = data.get('points')
-            question.seconds = data.get('seconds')
+            if data.get('is_active'):
+
+                Question.objects.update(is_active=False)
+                question.is_active = True
+                question.number = data.get('number')
+                question.save()
+               
+            else:
+                question.question = data.get('question_text')
+                question.choice_A = data.get('option_a')
+                question.choice_B = data.get('option_b')
+                question.choice_C = data.get('option_c')
+                question.choice_D = data.get('option_d')
+                question.answer_key = data.get('answer_key')
+                question.points = data.get('points')
+                question.seconds = data.get('seconds')
+
             question.save()
 
             return HttpResponse(status=204)
@@ -320,13 +329,15 @@ def start_quiz(request, id):
     quiz = Quiz.objects.get(id=id)
 
     if quiz.host == request.user:
+      
+            Question.objects.update(is_active=False)  
+            questions = Question.objects.filter(quiz=quiz)
+            num_participants = quiz.participant_set.filter(is_active=True).count()
 
-        questions = Question.objects.filter(quiz=quiz)
+            return render(request, 'quizzes/start-quiz.html', {
+                'questions': questions,
+                'quiz': quiz,
+                'num_participants': num_participants
+            })
 
-        num_participants = quiz.participant_set.count()
 
-        return render(request, 'quizzes/start-quiz.html', {
-            'questions': questions,
-            'quiz': quiz,
-            'num_participants': num_participants
-        })

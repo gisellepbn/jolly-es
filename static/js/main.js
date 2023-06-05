@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Live quiz
 	const message = document.querySelector('.message');
+	const message_1 = document.querySelector('#message-1');
+	const message_2 = document.querySelector('#message-2');
 	const participant_name = document.querySelector('#participant-name');
 	const live_question = document.querySelector('.live-question');
 	const timer = document.querySelector('#question-timer');
@@ -16,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const choice_b = document.querySelector('#b');
 	const choice_c = document.querySelector('#c');
 	const choice_d = document.querySelector('#d');
+	const question_number = document.querySelector('#question-num');
 
 	// Edit quiz section
 	const questions = document.querySelectorAll('.question');
@@ -47,25 +50,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	const time_limit = document.querySelector('#time-limit');
 	const question_num = document.querySelector('#question-number');
 	const question_points = document.querySelector('#question-points');
-	const send_question = document.querySelector('#send-question');
+	const send_question_btn = document.querySelector('#send-question');
+	const choice_texts = document.querySelectorAll('.choice-text');
+	const start_quiz = document.querySelector('#start-quiz');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
 
-		// check there is an active question and it has not been answered by the participant yet
+		// check if there is an active question and it has not been answered by the participant yet
 		if (
 			question !== '' &&
-			localStorage.getItem(`question-${question}`) === null
+			sessionStorage.getItem(`question-${question}`) === null
 		) {
-			message.classList.toggle('message-hidden');
-			live_question.classList.toggle('hidden');
+			live_question.classList.remove('hidden');
+			message.classList.add('message-hidden');
 			const live_quiz = document.querySelector('#live-quiz');
 			live_quiz.style.background = '#f9f7f7';
 
 			window.addEventListener('load', () => {
-				if (!localStorage.getItem('countdown')) {
+				if (!sessionStorage.getItem('countdown')) {
 					countdown(timer.dataset.time, timer);
-					localStorage.setItem('countdown', 'true');
+					sessionStorage.setItem('countdown', 'true');
 				} else {
 					// submit answer with score 0
 					submit_answer(
@@ -199,38 +204,62 @@ document.addEventListener('DOMContentLoaded', () => {
 		confirm.addEventListener('click', () => delete_quiz(modal.dataset.quiz));
 	}
 
-	start_questions.forEach((question) => {
-		question.addEventListener('click', () => {
+	if (start_questions) {
+		start_questions.forEach((question) => {
 			const question_id = question.dataset.question;
 			const text_div = document.querySelectorAll('.choice-text');
 
-			start_questions.forEach((question) => {
-				question.style.backgroundColor = 'transparent';
-			});
-			question.style.backgroundColor = '#dbe2ef';
-
-			// Change border of div with correct answer
-			text_div.forEach((div) => {
-				div.style.border = 'none';
-			});
-
-			if (!sessionStorage.getItem('question_counter')) {
-				sessionStorage.setItem('question_counter', 1);
+			if (sessionStorage.getItem(`sent_question_${question_id}`)) {
+				const question_div = document.querySelector(
+					`[data-question='${question_id}']`
+				);
+				question_div.disabled = true;
+				question_div.classList.add('disabled');
 			}
-			start_question_details(question_id);
-			send_question.dataset.question = question_id;
-			send_question.disabled = false;
-		});
-	});
 
-	if (send_question) {
-		send_question.addEventListener('click', () => {
+			// Set active question with page reload
+			if (sessionStorage.getItem('active_question') === question_id) {
+				send_question(question_id);
+			}
+
+			question.addEventListener('click', () => {
+				start_questions.forEach((question) => {
+					question.style.backgroundColor = 'transparent';
+				});
+				question.style.backgroundColor = '#dbe2ef';
+
+				// Change border of div with correct answer
+				text_div.forEach((div) => {
+					div.style.border = 'none';
+				});
+
+				if (!sessionStorage.getItem('question_counter')) {
+					sessionStorage.setItem('question_counter', 1);
+				}
+				start_question_details(question_id);
+				send_question_btn.dataset.question = question_id;
+				send_question_btn.disabled = false;
+				send_question_btn.classList.remove('disabled-btn');
+			});
+		});
+	}
+
+	if (send_question_btn) {
+		send_question_btn.addEventListener('click', () => {
 			let counter = parseInt(sessionStorage.getItem('question_counter'));
 			sessionStorage.setItem('question_counter', ++counter);
 
-			console.log(sessionStorage.getItem('question_counter'));
+			const question_id = send_question_btn.dataset.question;
+			send_question(question_id);
+
+			// add sent question to list of host sent questions
+			sessionStorage.setItem(`sent_question_${question_id}`, 'true');
 		});
 	}
+
+	// window.addEventListener('beforeunload', () => {
+	// 	sessionStorage.clear();
+	// });
 
 	// Functions
 
@@ -252,11 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function submit_answer(key, seconds, pin, participant) {
-		console.log('key', key);
-		console.log('seconds', seconds);
-		console.log('pin', pin);
-		console.log('participant', participant);
-
 		fetch(`/live-quiz/${pin}/${participant}`, {
 			method: 'POST',
 			body: JSON.stringify({
@@ -265,11 +289,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			}),
 			headers: { 'X-CSRFToken': getCookie('csrftoken') },
 		}).then(() => {
-			// clear countdown from localstorage
-			localStorage.removeItem('countdown');
+			// clear countdown from sessionStorage
+			sessionStorage.removeItem('countdown');
 
 			// add answered question to list of answered questions
-			localStorage.setItem(
+			sessionStorage.setItem(
 				`question-${live_question.dataset.question}`,
 				'true'
 			);
@@ -367,8 +391,44 @@ document.addEventListener('DOMContentLoaded', () => {
 				);
 
 				correct_answer_div.style.border = `1px solid ${correct_answer_div.dataset.color}`;
-
 				question_points.textContent = question.points + ' pts';
 			});
+	}
+
+	function send_question(question) {
+		fetch(`/question/${question}`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				is_active: true,
+				number: sessionStorage.getItem('question_counter') - 1,
+			}),
+			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		}).then(() => {
+			sessionStorage.setItem('active_question', question);
+
+			const question_div = document.querySelector(
+				`[data-question='${question}']`
+			);
+
+			question_div.disabled = true;
+			question_div.classList.add('disabled');
+
+			start_question_text.textContent = '';
+			start_text_a.textContent = '';
+			start_text_b.textContent = '';
+			start_text_c.textContent = '';
+			start_text_d.textContent = '';
+			question_points.textContent = 'Points';
+			question_num.textContent = '';
+			time_limit.textContent = 'Time';
+
+			// Remove border from correct answer div
+			choice_texts.forEach((choice) => {
+				choice.style.border = '1px solid #dbe2ef';
+			});
+
+			send_question_btn.disabled = true;
+			send_question_btn.classList.add('disabled-btn');
+		});
 	}
 });

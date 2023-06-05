@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="grid">
-    {% include 'navbar.html' %}
+    {% include 'partials/navbar.html' %}
 
     <div class="wrapper">
         <section class="header-section">
@@ -20,7 +20,7 @@
         </section>
 
         <form class="form" action="" method='post'>
-            {% include 'alerts.html' %}
+            {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}
             <a class="redirect-link link" href="{% url 'index' %}">Already have an account</a>
@@ -29,7 +29,7 @@
 
     </div>
 
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 </div>
 
 {% endblock %}

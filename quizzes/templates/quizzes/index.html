@@ -9,7 +9,7 @@
 <div class="grid">
 
     <head>
-        {% include 'navbar.html' %}
+        {% include 'partials/navbar.html' %}
     </head>
     <section>
         <div class="hero-section">
@@ -27,7 +27,7 @@
 
 
             <form class="form" action="" method='post'>
-                {% include 'alerts.html' %}
+                {% include 'partials/alerts.html' %}
                 {% csrf_token %}
                 {{form.username}}
                 {{form.password}}
@@ -38,7 +38,7 @@
     </section>
 
 
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 </div>
 
 

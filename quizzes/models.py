@@ -42,6 +42,7 @@ class Participant(models.Model):
     account_color = models.CharField(max_length=6, unique=True)
     quizzes = models.ManyToManyField(Quiz, default=None)
     user_id = models.UUIDField(User.id, blank=True, null=True)
+    is_active = models.BooleanField(default=False)
     joined = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
@@ -73,6 +74,7 @@ class Question(models.Model):
     seconds = models.PositiveIntegerField(
         default=5, validators=[MinValueValidator(5), MaxValueValidator(180)])
     is_active = models.BooleanField(default=False)
+    number = models.PositiveIntegerField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:
@@ -91,7 +93,8 @@ class Question(models.Model):
             "choice_D": self.choice_D,
             "answer_key": self.answer_key,
             "points": self.points,
-            "seconds": self.seconds
+            "seconds": self.seconds,
+            "number": self.number
         }
 
 

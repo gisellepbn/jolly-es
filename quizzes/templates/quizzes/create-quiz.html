@@ -8,18 +8,18 @@
 {% block content %}
 
 <div class="grid">
-    {% include 'navbar.html' %}
+    {% include 'partials/navbar.html' %}
     <div id="create-quiz" class="wrapper">
         <h3>Create Quiz</h3>
         <form action="" class="form" method='post'>
 
-            {% include 'alerts.html' %}
+            {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}
             <input type="submit" class="btn submit-btn" value="Save">
         </form>
     </div>
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 </div>
 
 {% endblock  %}

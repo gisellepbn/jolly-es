@@ -5,14 +5,14 @@
 
 {% block content %}
 <div class="grid">
-    {% include 'navbar.html' %}
+    {% include 'partials/navbar.html' %}
     <div id="live-quiz" class="wrapper">
         <div class="message">
             <h1 class="message-title">Hello, <span id="participant-name" class="underline">{{participant.name}}</span>
             </h1>
             <div class="message-body">
-                <p>Your <span>{{quiz.name}}</span> question is coming soon.</p>
-                <p>Get ready!</p>
+                <p id="message-1">Your <span>{{quiz.name}}</span> question is coming soon.</p>
+                <p id="message-2">Get ready!</p>
             </div>
         </div>
 
@@ -21,7 +21,7 @@
             <h3>Live Quiz: {{quiz.name}}</h3>
             <div class="question-box">
                 <div class="question-header">
-                    <p>Question <span id="question-number">1</span></p>
+                    <p>Question <span id="question-num">{{question.number}}</span></p>
                     <p id="question-timer" data-time="{{question.seconds}}">{{question.seconds}} <span>sec</span></p>
                 </div>
                 <div class="question-text">
@@ -64,6 +64,6 @@
             </div>
         </div>
     </div>
-    {% include 'footer.html' %}
+    {% include 'partials/footer.html' %}
 </div>
 {% endblock content %}

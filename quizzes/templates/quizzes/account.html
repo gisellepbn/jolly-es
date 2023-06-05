@@ -6,7 +6,7 @@
 {% block content %}
 
 <div class="grid">
-    {% include 'navbar.html' %}
+    {% include 'partials/navbar.html' %}
 
     <div class="wrapper">
         <div class="account-header">
@@ -20,7 +20,7 @@
             <h3 class="content-title">Quizzes</h3>
 
             <form class="search-form" action="" method='get'>
-                {% include 'alerts.html' %}
+                {% include 'partials/alerts.html' %}
                 {% csrf_token %}
                 <select class="input" name="search-options" id="quiz-search-options">
                     <option selected disabled>Select option</option>
@@ -82,7 +82,7 @@
 
 </div>
 
-{% include 'footer.html' %}
+{% include 'partials/footer.html' %}
 </div>
 
 

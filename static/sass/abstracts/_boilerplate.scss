@@ -70,3 +70,9 @@ span {
 ::-webkit-scrollbar-thumb:hover {
 	background: $complementary-color;
 }
+
+.disabled {
+	opacity: 40%;
+	background-color: #eee !important;
+	pointer-events: none;
+}

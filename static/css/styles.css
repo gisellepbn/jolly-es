@@ -69,6 +69,12 @@ span {
   background: #c6f4a2;
 }
 
+.disabled {
+  opacity: 40%;
+  background-color: #eee !important;
+  pointer-events: none;
+}
+
 h1,
 h2,
 h3 {
@@ -169,7 +175,7 @@ p {
   transition: 0.4s;
 }
 .navbar .menu-items .menu-item {
-  padding: 0.6rem;
+  padding: 1rem;
   width: 100%;
   background-color: #f9f7f7;
   transition: all 0.2s;
@@ -216,6 +222,12 @@ p {
   background-color: transparent;
   outline: 1px solid #3f72af;
   color: #3f72af;
+}
+
+.disabled-btn {
+  opacity: 10%;
+  transition: none;
+  pointer-events: none;
 }
 
 .cancel-btn {
@@ -316,6 +328,7 @@ p {
   padding-top: 2rem;
   text-align: center;
   padding-top: 0;
+  border-radius: 2px;
 }
 .messages li {
   padding: 1rem;
@@ -583,6 +596,7 @@ p {
 }
 #live-quiz .live-question .question-choices .choice-letter {
   width: 5%;
+  height: 100%;
   display: flex;
   justify-content: center;
   padding: 1rem;
@@ -605,6 +619,7 @@ p {
 }
 #live-quiz .live-question .question-choices .choice-text {
   width: 95%;
+  height: 100%;
   padding: 1rem;
   background-color: #fff;
 }
@@ -916,13 +931,6 @@ p {
 }
 #start-quiz .active-question .cta-section {
   margin: 0 0 1rem;
-}
-#start-quiz .active-question .cta-section button:disabled {
-  cursor: default;
-  opacity: 20%;
-}
-#start-quiz .active-question .cta-section button:disabled:hover {
-  border: none;
 }
 #start-quiz .active-question .cta-section #end-quiz {
   background-color: #f47c7c;

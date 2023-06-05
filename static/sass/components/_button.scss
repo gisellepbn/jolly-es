@@ -17,6 +17,12 @@
 	}
 }
 
+.disabled-btn {
+	opacity: 10%;
+	transition: none;
+	pointer-events: none;
+}
+
 .cancel-btn {
 	background-color: transparent;
 	color: $secondary-color;

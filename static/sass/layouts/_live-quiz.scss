@@ -87,6 +87,7 @@
 
 				&-letter {
 					width: 5%;
+					height: 100%;
 					display: flex;
 					justify-content: center;
 					padding: $small;
@@ -115,6 +116,7 @@
 
 				&-text {
 					width: 95%;
+					height: 100%;
 					padding: $small;
 					background-color: $white-color;
 				}

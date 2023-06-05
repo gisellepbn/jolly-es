@@ -129,17 +129,6 @@
 		.cta-section {
 			margin: 0 0 $small;
 
-			button:disabled {
-				// background-color: $base-color;
-				// color: $text-color;
-				cursor: default;
-				opacity: 20%;
-
-				&:hover {
-					border: none;
-				}
-			}
-
 			#end-quiz {
 				background-color: $error-color;
 
