@@ -9,16 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Live quiz
 	const message = document.querySelector('.message');
-	const message_1 = document.querySelector('#message-1');
-	const message_2 = document.querySelector('#message-2');
-	const participant_name = document.querySelector('#participant-name');
 	const live_question = document.querySelector('.live-question');
 	const timer = document.querySelector('#question-timer');
 	const choice_a = document.querySelector('#a');
 	const choice_b = document.querySelector('#b');
 	const choice_c = document.querySelector('#c');
 	const choice_d = document.querySelector('#d');
-	const question_number = document.querySelector('#question-num');
+	const next_btn = document.querySelector('#next-btn');
 
 	// Edit quiz section
 	const questions = document.querySelectorAll('.question');
@@ -53,14 +50,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	const send_question_btn = document.querySelector('#send-question');
 	const choice_texts = document.querySelectorAll('.choice-text');
 	const start_quiz = document.querySelector('#start-quiz');
+	const end_quiz_btn = document.querySelector('#end-quiz');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
+		const pin = live_question.dataset.pin;
 
 		// check if there is an active question and it has not been answered by the participant yet
 		if (
 			question !== '' &&
-			sessionStorage.getItem(`question-${question}`) === null
+			sessionStorage.getItem(`question_${pin}_${question}`) === null
 		) {
 			live_question.classList.remove('hidden');
 			message.classList.add('message-hidden');
@@ -257,9 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	// window.addEventListener('beforeunload', () => {
-	// 	sessionStorage.clear();
-	// });
+	if (end_quiz_btn) {
+		end_quiz_btn.addEventListener('click', () => {
+			end_quiz(start_quiz.dataset.quiz);
+		});
+	}
+
+	if (next_btn) {
+		next_btn.addEventListener('click', () => reloadPage());
+	}
 
 	// Functions
 
@@ -294,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// add answered question to list of answered questions
 			sessionStorage.setItem(
-				`question-${live_question.dataset.question}`,
+				`question_${pin}_${live_question.dataset.question}`,
 				'true'
 			);
 
@@ -430,5 +435,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			send_question_btn.disabled = true;
 			send_question_btn.classList.add('disabled-btn');
 		});
+	}
+
+	function end_quiz(quiz) {
+		fetch(`/start-quiz/${quiz}`, {
+			method: 'PUT',
+			body: JSON.stringify({
+				is_active: false,
+			}),
+			headers: { 'X-CSRFToken': getCookie('csrftoken') },
+		}).then(() => {
+			sessionStorage.clear();
+			document.location.href = '/account/all';
+		});
+	}
+
+	function reloadPage() {
+		window.location.reload();
 	}
 });

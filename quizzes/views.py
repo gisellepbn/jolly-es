@@ -166,8 +166,8 @@ def live_quiz(request, pin, participant_id):
     try:
         quiz = Quiz.objects.get(pin=pin)
         participant = Participant.objects.get(id=participant_id)
-    except (Quiz.DoesNotExist, Participant.DoesNotExist):
-        return HttpResponse('Invalid Request', content_type='text/plain')
+    except (Quiz.DoesNotExist, Participant.DoesNotExist):         
+        return redirect('index')
 
     if quiz and participant:
 
@@ -329,15 +329,40 @@ def start_quiz(request, id):
     quiz = Quiz.objects.get(id=id)
 
     if quiz.host == request.user:
-      
-            Question.objects.update(is_active=False)  
-            questions = Question.objects.filter(quiz=quiz)
-            num_participants = quiz.participant_set.filter(is_active=True).count()
+            
+            if request.method == 'PUT':
 
-            return render(request, 'quizzes/start-quiz.html', {
-                'questions': questions,
-                'quiz': quiz,
-                'num_participants': num_participants
-            })
+                data = json.loads(request.body)
+
+                if data.get('is_active') == False:
+
+                    quiz.is_active = False
+                    quiz.participant_set.update(is_active=False)
+                    quiz.save()
+
+                    while True:
+                        try:
+                            quiz.pin = random.randint(1000, 9999)
+                            quiz.save()
+                            break
+                        except IntegrityError:
+                            print('UNIQUE constraint failed: quizzes_quiz.pin')
+                   
+
+                    return HttpResponse(status=204)
+                
+                
+            else:
+                quiz.is_active = True
+                quiz.save()
+                Question.objects.update(is_active=False)  
+                questions = Question.objects.filter(quiz=quiz)
+                num_participants = quiz.participant_set.filter(is_active=True).count()
+
+                return render(request, 'quizzes/start-quiz.html', {
+                        'questions': questions,
+                        'quiz': quiz,
+                        'num_participants': num_participants
+                    })
 
 

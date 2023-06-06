@@ -25,6 +25,7 @@ class Quiz(models.Model):
     topic = models.CharField(max_length=200, blank=True, null=True)
     pin = models.PositiveIntegerField(
         unique=True, validators=[MinValueValidator(1000), MaxValueValidator(9999)])
+    is_active = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     class Meta:

@@ -544,9 +544,14 @@ p {
   gap: 1rem;
   margin-top: 1.5rem;
 }
-#live-quiz .message .message-body p {
+#live-quiz .message .message-body p,
+#live-quiz .message .message-body a {
   color: #fff;
   font-size: 1.2rem;
+}
+#live-quiz .message .message-body a {
+  width: fit-content;
+  font-weight: 700;
 }
 #live-quiz .live-question {
   display: flex;
@@ -573,6 +578,7 @@ p {
 }
 #live-quiz .live-question .question-box .question-header p {
   color: #fff;
+  font-weight: 700;
 }
 #live-quiz .live-question .question-box .question-header #question-timer {
   color: #f47c7c;

@@ -28,9 +28,15 @@
 			gap: $small;
 			margin-top: $medium;
 
-			p {
+			p,
+			a {
 				color: $white-color;
 				font-size: 1.2rem;
+			}
+
+			a {
+				width: fit-content;
+				font-weight: $font-bold;
 			}
 		}
 	}
@@ -59,6 +65,7 @@
 
 				p {
 					color: $white-color;
+					font-weight: $font-bold;
 				}
 
 				#question-timer {

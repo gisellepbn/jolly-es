@@ -8,12 +8,27 @@
     {% include 'partials/navbar.html' %}
     <div id="live-quiz" class="wrapper">
         <div class="message">
-            <h1 class="message-title">Hello, <span id="participant-name" class="underline">{{participant.name}}</span>
-            </h1>
+
+            {% if quiz and quiz.is_active == 1 %}
             <div class="message-body">
-                <p id="message-1">Your <span>{{quiz.name}}</span> question is coming soon.</p>
-                <p id="message-2">Get ready!</p>
+                <h1 class="message-title">Hello, <span id="participant-name"
+                        class="underline">{{participant.name}}</span>
+                </h1>
+                <p id="message-1">Your question is coming soon.</p>
+
+                <a id="next-btn" class="link">Go!</a>
             </div>
+            {% else %}
+            <div class="message-body">
+                <h1 class="message-title">Bye, <span id="participant-name" class="underline">{{participant.name}}</span>
+                </h1>
+                <p id="message-1">This quiz has ended.</p>
+                <p id="message-2">Till next time!</p>
+            </div>
+
+            {% endif %}
+
+
         </div>
 
         <div class="live-question hidden" data-question="{{question.id}}" data-pin="{{quiz.pin}}"
