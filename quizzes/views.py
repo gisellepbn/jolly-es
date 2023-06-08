@@ -10,6 +10,8 @@ from .models import Quiz, Participant, Question, Answer
 from django.http import JsonResponse
 import json
 from django.db.utils import IntegrityError
+from django.db.models import Sum
+import secrets
 
 
 def index(request):
@@ -53,13 +55,9 @@ def register(request):
             user.username = request.POST['username'].lower()
             user.password = make_password(user.password)
 
-            # Generate a random number in between 0 and 2^24
-            account_color = random.randrange(0, 2**24)
-
-            # Convert that number from base-10 (decimal) to base-16 (hexadecimal)
-            hex_color = hex(account_color)
-
-            account_color = hex_color[2:]
+            # Generate hex color
+            account_color = secrets.token_hex(3)
+          
             user.account_color = account_color
 
             user.save()
@@ -143,8 +141,8 @@ def join_quiz(request):
 
         if quiz:
 
-            color = hex(random.randrange(0, 2**24))
-            account_color = color[2:]
+            # Generate hex color
+            account_color = secrets.token_hex(3)
 
             participant = Participant(
                 name=name, account_color=account_color, is_active=True)
@@ -167,7 +165,7 @@ def live_quiz(request, pin, participant_id):
         quiz = Quiz.objects.get(pin=pin)
         participant = Participant.objects.get(id=participant_id)
     except (Quiz.DoesNotExist, Participant.DoesNotExist):         
-        return redirect('index')
+        return redirect('join_quiz')
 
     if quiz and participant:
 
@@ -366,3 +364,54 @@ def start_quiz(request, id):
                     })
 
 
+
+
+def scoreboard(request, id):
+
+    quiz = Quiz.objects.get(id=id)
+    
+    active_participants =  quiz.participant_set.filter(is_active=True)
+
+    scores = []
+    
+
+    for participant in active_participants:
+
+        questions = Question.objects.filter(quiz=quiz)
+        score = participant.answer_set.filter(question__in=questions).aggregate(Sum('score'))
+        time = participant.answer_set.filter(question__in=questions).aggregate(Sum('seconds'))
+
+      
+        if score['score__sum'] is None:
+            score['score__sum'] = 0
+       
+
+        if time['seconds__sum'] is None:
+            time['seconds__sum'] = 0
+        
+        
+       
+        record = {
+            'participant': participant,
+            'score': score['score__sum'],
+            'time': time['seconds__sum']
+        }            
+        
+        
+        scores.append(record)
+
+    scores = sorted(scores, key=lambda s: (s['score'], s['time']), reverse=True)
+
+    top_score = None
+
+    if len(scores) > 0 and scores[0]['score'] > 0:
+        top_score = scores[0]['score']
+   
+
+    return render(request, 'quizzes/scoreboard.html', {
+        'active_participants': active_participants,
+        'quiz': quiz,
+        'scores': scores,
+        'top_score': top_score
+      
+    })

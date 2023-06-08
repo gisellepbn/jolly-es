@@ -3,7 +3,7 @@
 #live-quiz {
 	justify-content: center;
 	background-color: $secondary-color;
-	padding: $medium 10%;
+	padding: $big 10%;
 
 	.message {
 		display: flex;
@@ -28,8 +28,7 @@
 			gap: $small;
 			margin-top: $medium;
 
-			p,
-			a {
+			p {
 				color: $white-color;
 				font-size: 1.2rem;
 			}
@@ -37,6 +36,7 @@
 			a {
 				width: fit-content;
 				font-weight: $font-bold;
+				margin-top: 0.5rem;
 			}
 		}
 	}

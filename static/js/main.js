@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const search_query = document.querySelector('#search_query');
 
 	// Live quiz
+	const live_quiz = document.querySelector('#live-quiz');
 	const message = document.querySelector('.message');
 	const live_question = document.querySelector('.live-question');
 	const timer = document.querySelector('#question-timer');
@@ -51,6 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	const choice_texts = document.querySelectorAll('.choice-text');
 	const start_quiz = document.querySelector('#start-quiz');
 	const end_quiz_btn = document.querySelector('#end-quiz');
+	const scoreboard_btn = document.querySelector('#scoreboard');
+
+	// Scoreboard elements
+	const participant_box = document.querySelectorAll('.participant');
+	const expand_btn = document.querySelector('#expand-btn');
+	const scoreboard_container = document.querySelector('#scoreboard-container');
+	const back_btn = document.querySelector('.back-btn');
+	const image_div = document.querySelector('.image');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
@@ -63,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		) {
 			live_question.classList.remove('hidden');
 			message.classList.add('message-hidden');
-			const live_quiz = document.querySelector('#live-quiz');
 			live_quiz.style.background = '#f9f7f7';
 
 			window.addEventListener('load', () => {
@@ -84,6 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			live_question.style.display = 'none';
 		}
 	}
+
+	participant_box.forEach((participant) => {
+		participant.querySelector(
+			'.place-circle'
+		).style.backgroundColor = `#${participant.dataset.color}`;
+	});
 
 	// Event Handlers
 	menu_icon.addEventListener('click', () => {
@@ -264,6 +278,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	if (next_btn) {
 		next_btn.addEventListener('click', () => reloadPage());
+	}
+
+	if (scoreboard_btn) {
+		scoreboard_btn.addEventListener('click', () => {
+			scoreboard(start_quiz.dataset.quiz);
+		});
+	}
+
+	if (expand_btn) {
+		expand_btn.addEventListener('click', (e) => {
+			e.preventDefault();
+
+			if (scoreboard_container.requestFullscreen) {
+				scoreboard_container.requestFullscreen();
+			} else if (scoreboard_container.webkitRequestFullscreen) {
+				/* Safari */
+				scoreboard_container.webkitRequestFullscreen();
+			} else if (container_container.msRequestFullscreen) {
+				/* IE11 */
+				scoreboard_container.msRequestFullscreen();
+			}
+		});
+	}
+
+	if (scoreboard_container) {
+		scoreboard_container.addEventListener('fullscreenchange', () => {
+			expand_btn.classList.toggle('hidden');
+			back_btn.classList.toggle('hidden');
+			image_div.querySelector('img').classList.toggle('hidden');
+		});
 	}
 
 	// Functions
@@ -452,5 +496,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	function reloadPage() {
 		window.location.reload();
+	}
+
+	function scoreboard(quiz) {
+		document.location.href = `/scoreboard/${quiz}`;
 	}
 });

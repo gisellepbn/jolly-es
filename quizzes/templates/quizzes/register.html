@@ -9,17 +9,11 @@
 <div class="grid">
     {% include 'partials/navbar.html' %}
 
-    <div class="wrapper">
-        <section class="header-section">
+    <div id="registration" class="wrapper">
 
-            <div class="header">
-                <h3 class="title">Quiz your Brain!</h3>
-                <p class="subtitle">Learn the fun way</p>
-            </div>
 
-        </section>
-
-        <form class="form" action="" method='post'>
+        <form id="register-form" class="form" action="" method='post'>
+            <h1>Register</h1>
             {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}

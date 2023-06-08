@@ -10,7 +10,7 @@
 
     {% include 'partials/navbar.html' %}
 
-    <div id="start-quiz" class="wrapper" data-quiz={{quiz.id}}>
+    <div id="start-quiz" class="wrapper" data-quiz={{quiz.id}} data-pin={{quiz.pin}}>
 
         <div class="questions-panel">
 
@@ -91,7 +91,6 @@
         </div>
     </div>
 
-    {% include 'partials/footer.html' %}
 
 </div>
 

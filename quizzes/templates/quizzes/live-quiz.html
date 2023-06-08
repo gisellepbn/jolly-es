@@ -6,8 +6,8 @@
 {% block content %}
 <div class="grid">
     {% include 'partials/navbar.html' %}
-    <div id="live-quiz" class="wrapper">
-        <div class="message">
+    <div id="live-quiz" class="wrapper" data-quiz="{{quiz.id}}">
+        <div class=" message">
 
             {% if quiz and quiz.is_active == 1 %}
             <div class="message-body">
@@ -16,7 +16,7 @@
                 </h1>
                 <p id="message-1">Your question is coming soon.</p>
 
-                <a id="next-btn" class="link">Go!</a>
+                <a id="next-btn" class="btn transparent-btn">Start</a>
             </div>
             {% else %}
             <div class="message-body">
@@ -79,6 +79,6 @@
             </div>
         </div>
     </div>
-    {% include 'partials/footer.html' %}
+
 </div>
 {% endblock content %}

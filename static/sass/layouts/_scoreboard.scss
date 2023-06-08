@@ -1,0 +1,156 @@
+@use '../abstracts/abstracts' as *;
+
+#scoreboard-container {
+	height: 95vh;
+	background-color: $secondary-color;
+	overflow-y: auto;
+
+	.back-btn {
+		align-self: flex-start;
+		border: none;
+		padding: 0.5rem;
+		font-size: $small;
+		font-weight: $font-bold;
+		color: $secondary-color;
+		clip-path: circle();
+		background-color: $primary-color;
+		box-shadow: $box-shadow;
+		cursor: pointer;
+		position: absolute;
+		left: 5%;
+		top: 10%;
+
+		&:hover {
+			background-color: $complementary-color;
+		}
+	}
+
+	#expand-btn {
+		position: absolute;
+		right: 5%;
+		top: 10%;
+
+		i {
+			color: $white-color;
+			padding: $small;
+
+			&:hover {
+				color: $complementary-color;
+			}
+		}
+	}
+
+	.scoreboard {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 0.5rem;
+		width: 90%;
+		border-radius: $border-radius;
+		padding: $medium;
+		position: relative;
+		top: 50px;
+
+		@media screen and (min-width: $breakpoint-mobile) {
+			width: 70%;
+		}
+
+		h1,
+		h3 {
+			color: $white-color;
+			text-align: center;
+		}
+
+		h3 {
+			font-weight: $font-regular;
+			font-size: $medium;
+		}
+
+		.image {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: $small;
+		}
+
+		.participant-list {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 0.5rem;
+			background-color: $base-color;
+			padding: $small;
+			border-radius: $border-radius;
+			width: 100%;
+
+			.participant {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0.8rem;
+				background-color: $white-color;
+				border-radius: $border-radius;
+				box-shadow: $box-shadow;
+				gap: $small;
+
+				p {
+					color: $text-color;
+					font-weight: $font-bold;
+					font-size: 0.7rem;
+					line-height: 1rem;
+
+					@media screen and (min-width: $breakpoint-mobile) {
+						font-size: $small;
+					}
+				}
+
+				&-info {
+					display: flex;
+					align-items: center;
+					gap: $small;
+					width: 80%;
+
+					.place-circle {
+						width: 0.5rem;
+						height: 0.5rem;
+						border-radius: 50%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}
+				}
+
+				&-score {
+					display: flex;
+					justify-content: space-around;
+					gap: $small;
+					min-width: 20%;
+					background-color: $score-box-color;
+					padding: 0.5rem 0.7rem;
+					border-radius: $border-radius;
+					box-shadow: $box-shadow;
+
+					.participant-points {
+						width: 50%;
+						text-align: end;
+					}
+
+					.participant-time {
+						width: 50%;
+						text-align: end;
+					}
+				}
+			}
+		}
+
+		.empty-list {
+			text-align: center;
+			color: $secondary-color;
+		}
+	}
+
+	.top-score {
+		background-color: $top-score-color !important;
+	}
+}

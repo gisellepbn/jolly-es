@@ -9,6 +9,7 @@
 	transition: 0.4s;
 	border: none;
 	cursor: pointer;
+	font-size: 0.8rem;
 
 	&:hover {
 		background-color: transparent;
@@ -48,4 +49,15 @@
 .submit-btn {
 	width: 100%;
 	margin-top: 0.5rem;
+}
+
+.transparent-btn {
+	background-color: transparent;
+	outline: 1px solid $white-color;
+	color: $white-color;
+
+	&:hover {
+		background-color: $base-color;
+		color: $secondary-color;
+	}
 }

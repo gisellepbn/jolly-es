@@ -1,7 +1,9 @@
 @use '../abstracts/abstracts' as *;
 
 .link {
-	font-weight: $font-regular;
+	color: $secondary-color;
+	font-weight: $font-bold;
+	font-size: 0.85rem;
 	position: relative;
 
 	&:hover {

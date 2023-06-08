@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>Scoreboard</title>
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="grid">
+
+    {% include 'partials/navbar.html' %}
+
+    <div id="scoreboard-container" class="wrapper">
+
+        <a class="back-btn" href="{% url 'start_quiz' quiz.id %}" title="Back">&#8617;</a>
+        <a id="expand-btn" title="Fullscreen"><i class="fa-solid fa-expand"></i></a>
+
+        <section class="scoreboard" data-quiz={{quiz}}>
+
+            <h1>Scoreboard</h1>
+            <h3 class='quiz-name'>{{quiz.name}}</h3>
+
+            <div class="image">
+                <img src="{% static 'images/scoreboard.svg' %}" alt="trophy image">
+            </div>
+
+            <div class="participant-list">
+                {% for score in scores %}
+
+                {% if score.score == top_score %}
+                <div class="participant top-score" data-color="{{score.participant.account_color}}">
+                    <div class="participant-info">
+                        <div class="place-circle">
+                        </div>
+                        <p class=" participant-name">{{score.participant.name}}</p>
+                    </div>
+                    <div class="participant-score">
+                        <p class="participant-points">{{score.score}} points</p>
+                        <p class="participant-time">{{score.time}} sec</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="participant" data-color="{{score.participant.account_color}}">
+                    <div class="participant-info">
+                        <div class="place-circle">
+                        </div>
+                        <p class=" participant-name">{{score.participant.name}}</p>
+                    </div>
+                    <div class="participant-score">
+                        <p class="participant-points">{{score.score}} points</p>
+                        <p class="participant-time">{{score.time}} sec</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% empty %}
+                <p class="empty-list"> No participants</p>
+                {% endfor %}
+            </div>
+
+
+
+        </section>
+
+    </div>
+
+
+
+
+</div>
+
+{% endblock content %}
