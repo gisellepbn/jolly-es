@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-<title>Live Quiz</title>
+<title>Quiz en vivo</title>
 {% endblock title %}
 
 {% block content %}
@@ -11,19 +11,20 @@
 
             {% if quiz and quiz.is_active == 1 %}
             <div class="message-body">
-                <h1 class="message-title">Hello, <span id="participant-name"
+                <h1 class="message-title">Hola, <span id="participant-name"
                         class="underline">{{participant.name}}</span>
                 </h1>
-                <p id="message-1">Your question is coming soon.</p>
+                <p id="message-1">Atent@ a la próxima pregunta.</p>
 
-                <a id="next-btn" class="btn transparent-btn">Start</a>
+                <a id="next-btn" class="btn transparent-btn">Continuar</a>
             </div>
             {% else %}
             <div class="message-body">
-                <h1 class="message-title">Bye, <span id="participant-name" class="underline">{{participant.name}}</span>
+                <h1 class="message-title">Adiós, <span id="participant-name"
+                        class="underline">{{participant.name}}</span>
                 </h1>
-                <p id="message-1">This quiz has ended.</p>
-                <p id="message-2">Till next time!</p>
+                <p id="message-1">Este quiz ha terminado</p>
+                <p id="message-2">Hasta la próxima</p>
             </div>
 
             {% endif %}
@@ -33,11 +34,11 @@
 
         <div class="live-question hidden" data-question="{{question.id}}" data-pin="{{quiz.pin}}"
             data-participant="{{participant.id}}">
-            <h3>Live Quiz: {{quiz.name}}</h3>
+            <h3>Quiz: {{quiz.name}}</h3>
             <div class="question-box">
                 <div class="question-header">
-                    <p>Question <span id="question-num">{{question.number}}</span></p>
-                    <p id="question-timer" data-time="{{question.seconds}}">{{question.seconds}} <span>sec</span></p>
+                    <p>Pregunta <span id="question-num">{{question.number}}</span></p>
+                    <p id="question-timer" data-time="{{question.seconds}}">{{question.seconds}} <span>seg</span></p>
                 </div>
                 <div class="question-text">
                     <p>{{question.question}}</p>

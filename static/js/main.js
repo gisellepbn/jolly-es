@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		scoreboard_container.addEventListener('fullscreenchange', () => {
 			expand_btn.classList.toggle('hidden');
 			back_btn.classList.toggle('hidden');
-			image_div.querySelector('img').classList.toggle('hidden');
+			// image_div.querySelector('img').classList.toggle('hidden');
 		});
 	}
 
@@ -440,7 +440,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				);
 
 				correct_answer_div.style.border = `1px solid ${correct_answer_div.dataset.color}`;
-				question_points.textContent = question.points + ' pts';
+				question_points.textContent = question.points + ' ptos';
 			});
 	}
 
@@ -467,9 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			start_text_b.textContent = '';
 			start_text_c.textContent = '';
 			start_text_d.textContent = '';
-			question_points.textContent = 'Points';
+			question_points.textContent = 'Puntos';
 			question_num.textContent = '';
-			time_limit.textContent = 'Time';
+			time_limit.textContent = 'Tiempo';
 
 			// Remove border from correct answer div
 			choice_texts.forEach((choice) => {

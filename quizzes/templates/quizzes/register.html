@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Sign Up</title>
+<title>Crear cuenta</title>
 {% endblock %}
 
 {% block content %}
@@ -13,12 +13,12 @@
 
 
         <form id="register-form" class="form" action="" method='post'>
-            <h1>Register</h1>
+            <h1>Registrarse</h1>
             {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}
-            <a class="redirect-link link" href="{% url 'index' %}">Already have an account</a>
-            <input class="btn submit-btn" type="submit" name="register" value="Sign up">
+            <a class="redirect-link link" href="{% url 'index' %}">Iniciar sesión</a>
+            <input class="btn submit-btn" type="submit" name="register" value="Crear cuenta">
         </form>
 
     </div>

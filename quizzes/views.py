@@ -45,6 +45,8 @@ def index(request):
 
 def register(request):
 
+    page = 'sign_up'
+
     if request.method == 'POST':
 
         form = UserForm(request.POST)
@@ -73,7 +75,8 @@ def register(request):
         form = UserForm()
 
     return render(request, 'quizzes/register.html', {
-        'form': form
+        'form': form,
+        'page': page
     })
 
 
@@ -124,6 +127,8 @@ def account(request, search_option='all'):
 
 def join_quiz(request):
 
+    page = 'join'
+
     if request.method == 'POST':
 
         if request.user.is_authenticated:
@@ -156,7 +161,11 @@ def join_quiz(request):
             participant.save()
             return redirect('live_quiz', pin, participant.id)
 
-    return render(request, 'quizzes/join-quiz.html')
+    return render(request, 'quizzes/join-quiz.html', {
+        'page': page
+    })
+
+
 
 
 def live_quiz(request, pin, participant_id):

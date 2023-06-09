@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Create Quiz</title>
+<title>Crear quiz</title>
 {% endblock title %}
 
 
@@ -10,13 +10,13 @@
 <div class="grid">
     {% include 'partials/navbar.html' %}
     <div id="create-quiz" class="wrapper">
-        <h3>Create Quiz</h3>
+        <h3>Crear quiz</h3>
         <form action="" class="form" method='post'>
 
             {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}
-            <input type="submit" class="btn submit-btn" value="Save">
+            <input type="submit" class="btn submit-btn" value="Guardar">
         </form>
     </div>
     {% include 'partials/footer.html' %}

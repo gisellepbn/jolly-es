@@ -23,11 +23,11 @@ class UserForm(ModelForm):
         super(UserForm, self).__init__(*args, **kwargs)
 
         self.fields['name'].widget.attrs.update(
-            {'class': 'input', 'placeholder': 'Name', 'name': 'name'})
+            {'class': 'input', 'placeholder': 'Nombre', 'name': 'name'})
         self.fields['username'].widget.attrs.update(
-            {'class': 'input', 'placeholder': 'Username', 'name': 'username'})
+            {'class': 'input', 'placeholder': 'Usuario', 'name': 'username'})
         self.fields['password'].widget.attrs.update(
-            {'class': 'input', 'placeholder': 'Password', 'name': 'password'})
+            {'class': 'input', 'placeholder': 'Contraseña', 'name': 'password'})
 
 
 class QuizForm(ModelForm):
@@ -41,10 +41,10 @@ class QuizForm(ModelForm):
         super(QuizForm, self).__init__(*args, **kwargs)
 
         self.fields['name'].widget.attrs.update(
-            {'id': 'name', 'class': 'input', 'placeholder': 'Quiz Name', 'name': 'name'})
+            {'id': 'name', 'class': 'input', 'placeholder': 'Nombre del quiz', 'name': 'name'})
 
         self.fields['topic'].widget.attrs.update(
-            {'id': 'input', 'class': 'input', 'placeholder': 'Topic', 'name': 'topic'})
+            {'id': 'input', 'class': 'input', 'placeholder': 'Categoría', 'name': 'topic'})
 
 
 class QuestionForm(ModelForm):
@@ -60,25 +60,25 @@ class QuestionForm(ModelForm):
         super(QuestionForm, self).__init__(*args, **kwargs)
 
         self.fields['question'].widget.attrs.update(
-            {'id': 'question', 'class': 'input', 'placeholder': 'Type a question', 'name': 'question', 'required': True})
+            {'id': 'question', 'class': 'input', 'placeholder': 'Teclee la pregunta', 'name': 'question', 'required': True})
 
         self.fields['choice_A'].widget.attrs.update(
-            {'id': 'choice_a', 'class': 'input choice_a', 'placeholder': 'Type choice', 'name': 'choice_a', 'required': True})
+            {'id': 'choice_a', 'class': 'input choice_a', 'placeholder': 'Teclee posible respuesta', 'name': 'choice_a', 'required': True})
 
         self.fields['choice_B'].widget.attrs.update(
-            {'id': 'choice_b', 'class': 'input choice_b', 'placeholder': 'Type choice', 'name': 'choice_b', 'required': True})
+            {'id': 'choice_b', 'class': 'input choice_b', 'placeholder': 'Teclee posible respuesta', 'name': 'choice_b', 'required': True})
 
         self.fields['choice_C'].widget.attrs.update(
-            {'id': 'choice_c', 'class': 'input choice_c', 'placeholder': 'Type choice', 'name': 'choice_c', 'required': True})
+            {'id': 'choice_c', 'class': 'input choice_c', 'placeholder': 'Teclee posible respuesta', 'name': 'choice_c', 'required': True})
 
         self.fields['choice_D'].widget.attrs.update(
-            {'id': 'choice_d', 'class': 'input choice_d', 'placeholder': 'Type choice', 'name': 'choice_d', 'required': True})
+            {'id': 'choice_d', 'class': 'input choice_d', 'placeholder': 'Teclee posible respuesta', 'name': 'choice_d', 'required': True})
 
         self.fields['answer_key'].widget.attrs.update(
-            {'id': 'answer_key', 'class': 'input', 'placeholder': 'Choose correct answer', 'name': 'answer_key', 'required': True})
+            {'id': 'answer_key', 'class': 'input', 'placeholder': 'Seleccione la respuesta correcta', 'name': 'answer_key', 'required': True})
 
         self.fields['points'].widget.attrs.update(
-            {'id': 'points', 'class': 'input', 'placeholder': 'Enter points', 'name': 'points', 'min': 1})
+            {'id': 'points', 'class': 'input', 'placeholder': 'Puntos', 'name': 'points', 'min': 1})
 
         self.fields['seconds'].widget.attrs.update(
-            {'id': 'seconds', 'class': 'input', 'placeholder': 'Enter number of seconds', 'name': 'seconds', 'min': 5})
+            {'id': 'seconds', 'class': 'input', 'placeholder': 'Tiempo límite en segundos', 'name': 'seconds', 'min': 5})

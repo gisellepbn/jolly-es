@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Start Quiz</title>
+<title>Host Quiz</title>
 {% endblock title %}
 
 {% block content %}
@@ -15,14 +15,14 @@
         <div class="questions-panel">
 
             <h2>{{quiz.name}} - Pin {{quiz.pin}}</h2>
-            <h3>Choose a question to go live</h3>
+            <h3>Seleccione una pregunta a enviar</h3>
             <div class="questions">
                 {% for question in questions  %}
                 <div class="start-question" data-question="{{question.id}}">
                     <p class="start-question-text">{{question}}</p>
                 </div>
                 {% empty %}
-                <p>No questions yet</p>
+                <p>No hay preguntas aún</p>
                 {% endfor %}
             </div>
 
@@ -33,13 +33,13 @@
 
         <div class="active-question">
 
-            <h3>Live Participants: {{num_participants}}</h3>
+            <h3>Participantes en vivo: {{num_participants}}</h3>
             <div class="question-box">
                 <div class="question-header">
-                    <p>Question <span id="question-number"></span></p>
+                    <p>Pregunta <span id="question-number"></span></p>
                     <div class="right">
-                        <p id="question-points"></p>
-                        <p id="time-limit" data-time="{{question.seconds}}">Time</p>
+                        <p id="question-points">Puntos</p>
+                        <p id="time-limit" data-time="{{question.seconds}}">Tiempo</p>
                     </div>
 
                 </div>
@@ -82,10 +82,10 @@
                 </div>
             </div>
             <div class="cta-section">
-                <button id="send-question" class="btn submit-btn disabled-btn" data-question disabled>Send
-                    Question</button>
-                <button id="end-quiz" class="btn submit-btn">End Quiz</button>
-                <button id="scoreboard" class="btn submit-btn">Scoreboard</button>
+                <button id="send-question" class="btn submit-btn disabled-btn" data-question disabled>Enviar
+                    pregunta</button>
+                <button id="end-quiz" class="btn submit-btn">Finalizar quiz</button>
+                <button id="scoreboard" class="btn submit-btn">Puntuaciones</button>
             </div>
 
         </div>

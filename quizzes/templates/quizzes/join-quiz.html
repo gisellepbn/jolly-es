@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-<title>Join Quiz</title>
+<title>Unirse a un juego</title>
 {% endblock title %}
 
 
@@ -10,15 +10,15 @@
 <div class="grid">
     {% include 'partials/navbar.html' %}
     <div id="join-container" class="wrapper">
-        <h3>Live Quiz</h3>
+        <h3>Quiz en vivo</h3>
         <form id="join-form" action="" class="form" method="post">
             {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {% if not request.user.is_authenticated %}
-            <input type="text" class="input" placeholder="Name" name="name" required>
+            <input type="text" class="input" placeholder="Nombre" name="name" required>
             {% endif %}
-            <input type="text" class="input" placeholder="Enter PIN" name="pin" required>
-            <input type="submit" class="submit-btn btn" value="Join Quiz" name="submit">
+            <input type="text" class="input" placeholder="Entre PIN del juego" name="pin" required>
+            <input type="submit" class="submit-btn btn" value="Comenzar" name="submit">
         </form>
     </div>
     {% include 'partials/footer.html' %}

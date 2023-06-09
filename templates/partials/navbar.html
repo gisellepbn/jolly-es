@@ -14,14 +14,24 @@
 
     <div class="menu hidden">
         <ul class="menu-items">
-            <li class="menu-item"><a class="menu-link" href="{% url 'join_quiz' %}">Join Quiz</a></li>
-            {% if request.user.is_authenticated %}
-            <li class="menu-item"><a class="menu-link" href="{% url 'create_quiz' %}">Create Quiz</a></li>
-            <li class="menu-item"><a class="menu-link" href="{% url 'account' 'all' %}"><span>Account</span></a>
-            </li>
-            <li class="menu-item"><a class="menu-link" href="{% url 'logout' %}">Log Out</a></li>
+
+            {% if page == 'sign_up' %}
+            <li class="menu-item"><a class="menu-link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'index' %}">Iniciar sesión</a></li>
+            {% elif page == 'join' %}
+            <li class="menu-item"><a class="menu-link" href="{% url 'index' %}">Iniciar sesión</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'register' %}">Crear cuenta</a></li>
             {% else %}
-            <li class="menu-item"><a class="menu-link" href="{% url 'register' %}">Sign Up</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'register' %}">Crear cuenta</a></li>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <li class="menu-item"><a class="menu-link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'create_quiz' %}">Crear quiz</a></li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'account' 'all' %}"><span>Mi cuenta</span></a>
+            </li>
+            <li class="menu-item"><a class="menu-link" href="{% url 'logout' %}">Cerrar sesión</a></li>
             {% endif %}
 
         </ul>
@@ -29,14 +39,27 @@
 
     <div class="navbar-menu hidden">
         <ul class="navbar-items">
-            <li class="navbar-item"><a class="link" href="{% url 'join_quiz' %}">Join Quiz</a></li>
-            {% if request.user.is_authenticated %}
-            <li class="navbar-item"><a class="link" href="{% url 'create_quiz' %}">Create Quiz</a></li>
-            <li class="navbar-item"><a class="link" href="{% url 'account' 'all' %}"><span>Account</span></a></li>
-            <li class="navbar-item"><a class="link" href="{% url 'logout' %}">Log Out</a></li>
+
+            {% if page == 'sign_up' %}
+            <li class="navbar-item"><a class="link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="navbar-item"><a class="btn" href="{% url 'index' %}">Iniciar sesión</a></li>
+            {% elif page == 'join' %}
+            <li class="navbar-item"><a class="link" href="{% url 'index' %}">Iniciar sesión</a></li>
+            <li class="navbar-item"><a class="btn" href="{% url 'register' %}">Crear cuenta</a></li>
             {% else %}
-            <li class="navbar-item"><a class="btn" href="{% url 'register' %}">Sign Up</a></li>
+            <li class="navbar-item"><a class="link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="navbar-item"><a class="btn" href="{% url 'register' %}">Crear cuenta</a></li>
             {% endif %}
+
+            {% if request.user.is_authenticated %}
+            <li class="navbar-item"><a class="link" href="{% url 'join_quiz' %}">Jugar</a></li>
+            <li class="navbar-item"><a class="link" href="{% url 'create_quiz' %}">Crear quiz</a></li>
+            <li class="navbar-item"><a class="link" href="{% url 'account' 'all' %}"><span>Mi cuenta</span></a></li>
+            <li class="navbar-item"><a class="link" href="{% url 'logout' %}">Cerrar sesión</a></li>
+            {% endif %}
+
+
+
 
         </ul>
     </div>

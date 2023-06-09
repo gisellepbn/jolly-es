@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-<title>Account</title>
+<title>Mi cuenta</title>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 
     <div class="wrapper">
         <div class="account-header">
-            <h1 class="account-title">Welcome, <span class="underline">{{user.name}}</span></h1>
+            <h1 class="account-title">Bienvenid@, <span class="underline">{{user.name}}</span></h1>
         </div>
 
 
@@ -23,26 +23,26 @@
                 {% include 'partials/alerts.html' %}
                 {% csrf_token %}
                 <select class="input" name="search-options" id="quiz-search-options">
-                    <option selected disabled>Select option</option>
+                    <option selected disabled>Seleccione una opción</option>
                     {% if option == 'all' %}
-                    <option value="all" selected>All quizzes</option>
+                    <option value="all" selected>Todos</option>
                     {% else %}
-                    <option value="all">All quizzes</option>
+                    <option value="all">Todos</option>
                     {% endif %}
                     {% if option == 'host' %}
-                    <option value="host" selected>My quizzes as a host</option>
+                    <option value="host" selected>Quizzes creados por mí</option>
                     {% else %}
-                    <option value="host">My quizzes as a host</option>
+                    <option value="host">Quizzes creados por mí</option>
                     {% endif %}
                     {% if option == 'participant' %}
-                    <option value="participant" selected>My quizzes as a participant</option>
+                    <option value="participant" selected>Quizzes jugados</option>
                     {% else %}
-                    <option value="participant">My quizzes as a participant</option>
+                    <option value="participant">Quizzes jugados</option>
                     {% endif %}
                 </select>
                 <div class="search-field">
                     <i class="fas fa-search"></i>
-                    <input id="search_query" class="input" type="text" placeholder="Search quiz ..." name="search_query"
+                    <input id="search_query" class="input" type="text" placeholder="Buscar quiz ..." name="search_query"
                         value="{{search_query}}">
                 </div>
             </form>
@@ -63,18 +63,18 @@
                         {% if quiz.topic %}
                         <p class="quiz-topic">{{quiz.topic}}</p>
                         {% endif %}
-                        <p class="quiz-host">created by {{quiz.host.username}}</p>
+                        <p class="quiz-host">creado por {{quiz.host.username}}</p>
                     </div>
 
                     {% if quiz.host == user %}
                     <div class="right-box">
-                        <a href="{% url 'edit_quiz' quiz.id %}" class="edit-quiz" title="Edit quiz"><i
+                        <a href="{% url 'edit_quiz' quiz.id %}" class="edit-quiz" title="Editar quiz"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
                     </div>
                     {% endif %}
                 </div>
                 {% empty %}
-                <p>No quizzes to show yet</p>
+                <p>No hay quizzes para mostrar</p>
                 {% endfor %}
             </div>
         </div>
