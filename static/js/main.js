@@ -80,14 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
 					sessionStorage.setItem('countdown', 'true');
 				} else {
 					// submit answer with score 0
-					// submit_answer(
-					// 	'',
-					// 	parseInt(timer.textContent),
-					// 	parseInt(live_question.dataset.pin),
-					// 	live_question.dataset.participant
-					// );
-					console.log('timer', timer.textContent);
-					countdown(timer.textContent, timer);
+					submit_answer(
+						'',
+						parseInt(timer.textContent),
+						parseInt(live_question.dataset.pin),
+						live_question.dataset.participant
+					);
 				}
 			});
 		} else {
