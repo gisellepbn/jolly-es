@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://jolly-6y6l.onrender.com']
+ALLOWED_HOSTS = ['jolly-6y6l.onrender.com']
 
 
 # Application definition
