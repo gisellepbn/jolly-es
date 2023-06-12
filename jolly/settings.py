@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import dj_database_url
 from decouple import config
 from pathlib import Path
 
@@ -77,16 +78,23 @@ WSGI_APPLICATION = 'jolly.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': '',
+#         'USER': '',
+#         'PASSWORD': '',
+#         'HOST': '',
+#         'PORT': '',
+#         'CONN_MAX_AGE': None
+#     }
+# }
+
+
+# Render PostgreSQL database
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-        'CONN_MAX_AGE': None
-    }
+    'default': dj_database_url.parse(config('DATABASE_URL')),
 }
 
 
