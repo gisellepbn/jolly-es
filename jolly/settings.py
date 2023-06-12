@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['']
 
@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware'
 ]
 
 ROOT_URLCONF = 'jolly.urls'
@@ -78,8 +79,12 @@ WSGI_APPLICATION = 'jolly.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
         'CONN_MAX_AGE': None
     }
 }
@@ -138,3 +143,32 @@ STATIC_ROOT = BASE_DIR/'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Content Security Policy
+
+CSP_DEFAULT_SRC = ["'self'",]
+
+CSP_IMG_SRC = ("'self'")
+
+CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com/',
+                 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
+
+CSP_FONT_SRC = ("'self'", 'https://fonts.gstatic.com/',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/webfonts/')
+
+CSP_SCRIPT_SRC = ("'self'")
+
+
+# HTTPS settings
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+
+# HSTS settings
+
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
