@@ -1,0 +1,28 @@
+@use '../abstracts/abstracts' as *;
+
+.link {
+	color: $secondary-color;
+	font-weight: $font-bold;
+	font-size: 0.85rem;
+	position: relative;
+
+	&:hover {
+		color: $text-color;
+	}
+
+	&:hover::after {
+		opacity: 1;
+	}
+}
+.link::after {
+	content: '';
+	width: 100%;
+	height: 3px;
+	background-color: $complementary-color;
+	position: absolute;
+	left: 0;
+	bottom: -4px;
+	opacity: 0;
+	transition: all 0.2s;
+	pointer-events: none;
+}

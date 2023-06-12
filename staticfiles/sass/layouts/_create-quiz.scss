@@ -1,0 +1,13 @@
+@use '../abstracts/abstracts' as *;
+
+#create-quiz {
+	justify-content: center;
+
+	h3 {
+		font-size: $medium;
+	}
+
+	.form {
+		padding-top: $medium;
+	}
+}

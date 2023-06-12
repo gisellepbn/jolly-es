@@ -1,0 +1,19 @@
+@use '../abstracts/abstracts' as *;
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	width: 80%;
+	min-width: 240px;
+	padding: $big 0;
+	border-radius: $border-radius !important;
+
+	@media screen and (min-width: 500px) {
+		width: 35%;
+	}
+
+	@media screen and (min-width: 1200px) {
+		width: 20%;
+	}
+}

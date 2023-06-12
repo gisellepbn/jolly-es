@@ -1,0 +1,14 @@
+@use '../abstracts/abstracts' as *;
+
+.input {
+	padding: 0.5rem $small;
+	outline: 1px solid $primary-color;
+	border-radius: $border-radius;
+	border: none;
+	width: 100%;
+
+	&:focus,
+	&:hover {
+		outline: 1px solid $secondary-color;
+	}
+}

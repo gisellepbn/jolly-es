@@ -1,0 +1,74 @@
+@use '../abstracts/abstracts' as *;
+
+.btn {
+	padding: 0.5rem $small;
+	background-color: $secondary-color;
+	color: $white-color;
+	border-radius: $border-radius;
+	width: fit-content;
+	transition: 0.4s;
+	border: none;
+	cursor: pointer;
+	font-size: 0.8rem;
+
+	&:hover {
+		background-color: transparent;
+		outline: 1px solid $secondary-color;
+		color: $secondary-color;
+	}
+}
+
+.disabled-btn {
+	opacity: 10%;
+	transition: none;
+	pointer-events: none;
+}
+
+.cancel-btn {
+	background-color: transparent;
+	color: $secondary-color;
+	outline: 1px solid $secondary-color;
+
+	&:hover {
+		background-color: $secondary-color;
+		color: $white-color;
+	}
+}
+
+.confirm-btn {
+	background-color: $error-color;
+	outline: 1px solid $error-color;
+
+	&:hover {
+		background-color: transparent;
+		color: $error-color;
+		outline: 1px solid $error-color;
+	}
+}
+
+.submit-btn {
+	width: 100%;
+	margin-top: 0.5rem;
+}
+
+.transparent-white-btn {
+	background-color: transparent;
+	outline: 1px solid $white-color;
+	color: $white-color;
+
+	&:hover {
+		background-color: $base-color;
+		color: $secondary-color;
+	}
+}
+
+.transparent-blue-btn {
+	background-color: transparent;
+	outline: 1px solid $secondary-color;
+	color: $secondary-color;
+
+	&:hover {
+		background-color: $secondary-color;
+		color: $white-color;
+	}
+}

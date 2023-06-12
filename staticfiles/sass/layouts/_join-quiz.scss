@@ -1,0 +1,13 @@
+@use '../abstracts/abstracts' as *;
+
+#join-container {
+	justify-content: center;
+
+	h3 {
+		font-size: $medium;
+	}
+
+	#join-form {
+		padding-top: $medium;
+	}
+}

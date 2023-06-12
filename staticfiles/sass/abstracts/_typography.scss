@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+h1,
+h2,
+h3 {
+	font-weight: $font-bold;
+	color: $secondary-color;
+}
+
+h1 {
+	font-size: $big;
+}
+
+h2 {
+	font-size: $medium;
+}
+
+h3 {
+	font-size: $small;
+}
+
+a {
+	text-decoration: none;
+	font-size: $small;
+	color: $secondary-color;
+	cursor: pointer;
+	transition: all 0.4s;
+}
+
+p {
+	font-weight: $font-regular;
+	line-height: $line-height;
+	margin-top: 0;
+	font-size: $small;
+	color: $text-color;
+}

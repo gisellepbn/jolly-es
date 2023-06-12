@@ -1,0 +1,27 @@
+@use '../abstracts/abstracts' as *;
+
+#registration {
+	justify-content: center;
+	// background-color: $secondary-color;
+}
+
+#register-form {
+	background-color: $white-color;
+	border-radius: $border-radius;
+	box-shadow: $box-shadow;
+	padding: $medium;
+
+	h1 {
+		font-size: $medium;
+		margin-bottom: $small;
+		text-align: center;
+	}
+}
+
+.redirect-link {
+	align-self: end;
+	width: fit-content;
+	margin-top: 0.5rem;
+	font-size: smaller;
+	opacity: 80%;
+}
