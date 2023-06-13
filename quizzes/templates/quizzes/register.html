@@ -17,7 +17,7 @@
             {% include 'partials/alerts.html' %}
             {% csrf_token %}
             {{form}}
-            <a class="redirect-link link" href="{% url 'index' %}">Iniciar sesión</a>
+            <a class="redirect-link link" href="{% url 'index' %}">Ya tengo una cuenta</a>
             <input class="btn submit-btn" type="submit" name="register" value="Crear cuenta">
         </form>
 
