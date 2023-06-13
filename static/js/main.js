@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+	const loader = document.querySelector('.loader');
+	loader.style.display = 'none';
+
 	// Navbar elements
 	const menu_icon = document.querySelector('.menu-icon');
 	const menu = document.querySelector('.menu');
