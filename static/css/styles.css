@@ -386,7 +386,15 @@ p {
   font-size: 1.2rem;
 }
 
-.loader {
+.loader-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f7f7;
+}
+.loader-container .loader {
   position: relative;
   display: block;
   height: 50px;
@@ -395,8 +403,7 @@ p {
   transition-timing-function: ease-in;
   animation: spinHourglas 1500ms infinite;
 }
-
-.loader::after {
+.loader-container .loader::after {
   content: "";
   box-sizing: border-box;
   display: inline-block;
@@ -404,11 +411,10 @@ p {
   height: 100%;
   background: 0 0;
   border-width: 0.65em;
-  border-color: #1e4d92 transparent;
+  border-color: #3f72af transparent;
   border-radius: 50%;
   border-style: solid;
 }
-
 @keyframes spinHourglas {
   0% {
     transform: rotate(0);
@@ -422,6 +428,7 @@ p {
     transform: rotate(360deg);
   }
 }
+
 .hero-section {
   display: flex;
   justify-content: center;

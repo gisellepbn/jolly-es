@@ -1,38 +1,47 @@
 @use '../abstracts/abstracts' as *;
 
-.loader {
-	position: relative;
-	display: block;
-	height: 50px;
-	width: 50px;
-	transition: all 0.3s;
-	transition-timing-function: ease-in;
-	animation: spinHourglas 1500ms infinite;
-}
+.loader-container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $base-color;
 
-.loader::after {
-	content: '';
-	box-sizing: border-box;
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	background: 0 0;
-	border-width: 0.65em;
-	border-color: #1e4d92 transparent;
-	border-radius: 50%;
-	border-style: solid;
-}
+	.loader {
+		position: relative;
+		display: block;
+		height: 50px;
+		width: 50px;
+		transition: all 0.3s;
+		transition-timing-function: ease-in;
+		animation: spinHourglas 1500ms infinite;
+	}
 
-@keyframes spinHourglas {
-	0% {
-		transform: rotate(0);
-		animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+	.loader::after {
+		content: '';
+		box-sizing: border-box;
+		display: inline-block;
+		width: 100%;
+		height: 100%;
+		background: 0 0;
+		border-width: 0.65em;
+		border-color: #3f72af transparent;
+		border-radius: 50%;
+		border-style: solid;
 	}
-	50% {
-		transform: rotate(180deg);
-		animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-	}
-	100% {
-		transform: rotate(360deg);
+
+	@keyframes spinHourglas {
+		0% {
+			transform: rotate(0);
+			animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+		}
+		50% {
+			transform: rotate(180deg);
+			animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
 	}
 }

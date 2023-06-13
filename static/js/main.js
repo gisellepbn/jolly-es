@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	window.addEventListener('load', () => {
-		const loader = document.querySelector('.loader');
+		const loader = document.querySelector('.loader-container');
 		loader.style.display = 'none';
 	});
 
