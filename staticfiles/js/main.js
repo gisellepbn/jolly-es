@@ -310,6 +310,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
+	window.addEventListener('load', () => {
+		const loader = document.querySelector('.loader-container');
+		loader.style.display = 'none';
+	});
+
 	// Functions
 
 	function countdown(sec, display) {
