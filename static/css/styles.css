@@ -495,8 +495,8 @@ p {
   align-self: end;
   width: fit-content;
   margin-top: 0.5rem;
-  font-size: smaller;
-  opacity: 80%;
+  font-size: 0.5rem;
+  opacity: 70%;
 }
 
 .account-header {
