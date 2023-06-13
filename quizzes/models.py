@@ -13,7 +13,7 @@ class User(AbstractUser):
     joined = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
-        return f'{self.username} {self.id}'
+        return self.username
 
 
 class Quiz(models.Model):

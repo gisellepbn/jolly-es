@@ -1,7 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-	const loader = document.querySelector('.loader');
-	loader.style.display = 'none';
-
 	// Navbar elements
 	const menu_icon = document.querySelector('.menu-icon');
 	const menu = document.querySelector('.menu');
@@ -312,6 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			// image_div.querySelector('img').classList.toggle('hidden');
 		});
 	}
+
+	window.addEventListener('load', () => {
+		const loader = document.querySelector('.loader');
+		loader.style.display = 'none';
+	});
 
 	// Functions
 
