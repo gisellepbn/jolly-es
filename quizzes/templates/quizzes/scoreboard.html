@@ -9,6 +9,7 @@
 
 <div class="grid">
 
+  
     {% include 'partials/navbar.html' %}
 
     <div id="scoreboard-container" class="wrapper">
@@ -38,6 +39,8 @@
                     <div class="participant-score">
                         <p class="participant-points">{{score.score}} ptos</p>
                         <p class="participant-time">{{score.time}} seg</p>
+                        <p class="correct-answers" title="Respuestas correctas">{{score.correct_answers}} &#x2713;</p>
+                        <p class="wrong-answers" title="Respuestas incorrectas">{{score.wrong_answers}} &#x2717;</p>
                     </div>
                 </div>
                 {% else %}
@@ -50,6 +53,8 @@
                     <div class="participant-score">
                         <p class="participant-points">{{score.score}} ptos</p>
                         <p class="participant-time">{{score.time}} seg</p>
+                        <p class="correct-answers" title="Respuestas correctas">{{score.correct_answers}} &#x2713;</p>
+                        <p class="wrong-answers" title="Respuestas incorrectas">{{score.wrong_answers}} &#x2717;</p>
                     </div>
                 </div>
                 {% endif %}

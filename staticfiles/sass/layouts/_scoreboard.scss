@@ -90,21 +90,26 @@
 
 			.participant {
 				display: flex;
-				justify-content: space-between;
-				align-items: center;
+				flex-direction: column;
 				padding: 0.6rem;
 				background-color: $white-color;
 				border-radius: $border-radius;
-				box-shadow: $box-shadow;
-				gap: $small;
+				gap: 0.5rem;
 
 				p {
 					color: $text-color;
 					font-weight: $font-bold;
 					font-size: 0.7rem;
 					line-height: 1rem;
+				}
 
-					@media screen and (min-width: $breakpoint-mobile) {
+				@media screen and (min-width: $breakpoint-mobile) {
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
+					gap: $small;
+
+					p {
 						font-size: $small;
 					}
 				}
@@ -112,8 +117,8 @@
 				&-info {
 					display: flex;
 					align-items: center;
-					gap: $small;
-					width: 80%;
+					gap: 0.5rem;
+					width: 70%;
 
 					.place-circle {
 						width: 0.5rem;
@@ -128,27 +133,24 @@
 				&-score {
 					display: flex;
 					justify-content: space-around;
-					gap: $small;
-					min-width: 20%;
+					gap: 0.5rem;
+					min-width: 30%;
 					background-color: $score-box-color;
-					padding: 0.6rem;
+					padding: 0.4rem;
 					border-radius: $border-radius;
 					box-shadow: $box-shadow;
 
 					p {
-						@media screen and (min-width: $breakpoint-mobile) {
+						width: 20%;
+						text-align: end;
+					}
+
+					@media screen and (min-width: $breakpoint-mobile) {
+						padding: 0.6rem;
+
+						p {
 							font-size: 0.9rem;
 						}
-					}
-
-					.participant-points {
-						width: 50%;
-						text-align: end;
-					}
-
-					.participant-time {
-						width: 50%;
-						text-align: end;
 					}
 				}
 			}

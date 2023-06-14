@@ -59,7 +59,7 @@ def register(request):
 
             # Generate hex color
             account_color = secrets.token_hex(3)
-          
+
             user.account_color = account_color
 
             user.save()
@@ -166,14 +166,12 @@ def join_quiz(request):
     })
 
 
-
-
 def live_quiz(request, pin, participant_id):
 
     try:
         quiz = Quiz.objects.get(pin=pin)
         participant = Participant.objects.get(id=participant_id)
-    except (Quiz.DoesNotExist, Participant.DoesNotExist):         
+    except (Quiz.DoesNotExist, Participant.DoesNotExist):
         return redirect('join_quiz')
 
     if quiz and participant:
@@ -296,7 +294,7 @@ def question(request, id):
                 question.is_active = True
                 question.number = data.get('number')
                 question.save()
-               
+
             else:
                 question.question = data.get('question_text')
                 question.choice_A = data.get('option_a')
@@ -336,91 +334,94 @@ def start_quiz(request, id):
     quiz = Quiz.objects.get(id=id)
 
     if quiz.host == request.user:
-            
-            if request.method == 'PUT':
 
-                data = json.loads(request.body)
+        if request.method == 'PUT':
 
-                if data.get('is_active') == False:
+            data = json.loads(request.body)
 
-                    quiz.is_active = False
-                    quiz.participant_set.update(is_active=False)
-                    quiz.save()
+            if data.get('is_active') == False:
 
-                    while True:
-                        try:
-                            quiz.pin = random.randint(1000, 9999)
-                            quiz.save()
-                            break
-                        except IntegrityError:
-                            print('UNIQUE constraint failed: quizzes_quiz.pin')
-                   
-
-                    return HttpResponse(status=204)
-                
-                
-            else:
-                quiz.is_active = True
+                quiz.is_active = False
+                quiz.participant_set.update(is_active=False)
                 quiz.save()
-                Question.objects.update(is_active=False)  
-                questions = Question.objects.filter(quiz=quiz)
-                num_participants = quiz.participant_set.filter(is_active=True).count()
 
-                return render(request, 'quizzes/start-quiz.html', {
-                        'questions': questions,
-                        'quiz': quiz,
-                        'num_participants': num_participants
-                    })
+                while True:
+                    try:
+                        quiz.pin = random.randint(1000, 9999)
+                        quiz.save()
+                        break
+                    except IntegrityError:
+                        print('UNIQUE constraint failed: quizzes_quiz.pin')
 
+                return HttpResponse(status=204)
 
+        else:
+            quiz.is_active = True
+            quiz.save()
+            Question.objects.update(is_active=False)
+            questions = Question.objects.filter(quiz=quiz)
+            num_participants = quiz.participant_set.filter(
+                is_active=True).count()
+
+            return render(request, 'quizzes/start-quiz.html', {
+                'questions': questions,
+                'quiz': quiz,
+                'num_participants': num_participants
+            })
 
 
 def scoreboard(request, id):
 
     quiz = Quiz.objects.get(id=id)
-    
-    active_participants =  quiz.participant_set.filter(is_active=True)
+
+    active_participants = quiz.participant_set.filter(is_active=True)
 
     scores = []
-    
 
     for participant in active_participants:
 
-        questions = Question.objects.filter(quiz=quiz)
-        score = participant.answer_set.filter(question__in=questions).aggregate(Sum('score'))
-        time = participant.answer_set.filter(question__in=questions).aggregate(Sum('seconds'))
+        correct_answers = 0
+        wrong_answers = 0
 
-      
+        questions = Question.objects.filter(quiz=quiz)
+        answers = participant.answer_set.filter(question__in=questions)
+
+        for answer in answers:
+            if answer.score > 0:
+                correct_answers += 1
+            else:
+                wrong_answers += 1
+
+        score = answers.aggregate(Sum('score'))
+        time = answers.aggregate(Sum('seconds'))
+
         if score['score__sum'] is None:
             score['score__sum'] = 0
-       
 
         if time['seconds__sum'] is None:
             time['seconds__sum'] = 0
-        
-        
-       
+
         record = {
             'participant': participant,
             'score': score['score__sum'],
-            'time': time['seconds__sum']
-        }            
-        
-        
+            'time': time['seconds__sum'],
+            'correct_answers': correct_answers,
+            'wrong_answers': wrong_answers,
+        }
+
         scores.append(record)
 
-    scores = sorted(scores, key=lambda s: (s['score'], s['time']), reverse=True)
+    scores = sorted(scores, key=lambda s: (
+        s['score'], s['time']), reverse=True)
 
     top_score = None
 
     if len(scores) > 0 and scores[0]['score'] > 0:
         top_score = scores[0]['score']
-   
 
     return render(request, 'quizzes/scoreboard.html', {
         'active_participants': active_participants,
         'quiz': quiz,
         'scores': scores,
         'top_score': top_score
-      
     })

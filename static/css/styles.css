@@ -387,8 +387,8 @@ p {
 }
 
 .loader-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1147,13 +1147,11 @@ p {
 }
 #scoreboard-container .scoreboard .participant-list .participant {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 0.6rem;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 #scoreboard-container .scoreboard .participant-list .participant p {
   color: #5f5f5f;
@@ -1162,6 +1160,12 @@ p {
   line-height: 1rem;
 }
 @media screen and (min-width: 480px) {
+  #scoreboard-container .scoreboard .participant-list .participant {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
   #scoreboard-container .scoreboard .participant-list .participant p {
     font-size: 1rem;
   }
@@ -1169,8 +1173,8 @@ p {
 #scoreboard-container .scoreboard .participant-list .participant-info {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  width: 80%;
+  gap: 0.5rem;
+  width: 70%;
 }
 #scoreboard-container .scoreboard .participant-list .participant-info .place-circle {
   width: 0.5rem;
@@ -1183,25 +1187,24 @@ p {
 #scoreboard-container .scoreboard .participant-list .participant-score {
   display: flex;
   justify-content: space-around;
-  gap: 1rem;
-  min-width: 20%;
+  gap: 0.5rem;
+  min-width: 30%;
   background-color: #ecfbe1;
-  padding: 0.6rem;
+  padding: 0.4rem;
   border-radius: 5px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+#scoreboard-container .scoreboard .participant-list .participant-score p {
+  width: 20%;
+  text-align: end;
+}
 @media screen and (min-width: 480px) {
+  #scoreboard-container .scoreboard .participant-list .participant-score {
+    padding: 0.6rem;
+  }
   #scoreboard-container .scoreboard .participant-list .participant-score p {
     font-size: 0.9rem;
   }
-}
-#scoreboard-container .scoreboard .participant-list .participant-score .participant-points {
-  width: 50%;
-  text-align: end;
-}
-#scoreboard-container .scoreboard .participant-list .participant-score .participant-time {
-  width: 50%;
-  text-align: end;
 }
 #scoreboard-container .scoreboard .empty-list {
   text-align: center;
