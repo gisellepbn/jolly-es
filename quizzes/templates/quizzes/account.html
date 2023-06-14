@@ -58,7 +58,7 @@
                         <a href="{% url 'start_quiz' quiz.id %}" class="quiz-name">{{quiz.name}}</a>
                         <p class="quiz-pin">Pin {{quiz.pin}}</p>
                         {% else %}
-                        <a href="" class="quiz-name">{{quiz.name}}</a>
+                        <a href="{% url 'join' %}" class="quiz-name">{{quiz.name}}</a>
                         {% endif %}
                         {% if quiz.topic %}
                         <p class="quiz-topic">{{quiz.topic}}</p>
