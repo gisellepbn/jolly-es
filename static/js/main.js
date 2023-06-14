@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const back_btn = document.querySelector('.back-btn');
 	const image_div = document.querySelector('.image');
 
+	// Input fields
+	const input = document.querySelectorAll('input');
+
 	if (live_question) {
 		const question = live_question.dataset.question;
 		const pin = live_question.dataset.pin;
@@ -319,6 +322,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (refresh_icon) {
 		refresh_icon.addEventListener('click', reloadPage);
 	}
+
+	input.forEach((input) => {
+		input.addEventListener('invalid', () => {
+			this.setCustomValidity('Por favor, complete la información');
+		});
+	});
 
 	// Functions
 
