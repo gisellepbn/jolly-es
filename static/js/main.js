@@ -323,11 +323,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		refresh_icon.addEventListener('click', reloadPage);
 	}
 
-	input_set.forEach((input) => {
-		input.addEventListener('invalid', (e) => {
-			e.target.setCustomValidity('Por favor, complete la información');
-		});
-	});
+	// input_set.forEach((input) => {
+	// 	input.addEventListener('invalid', (e) => {
+	// 		e.target.setCustomValidity('Por favor, complete la información');
+	// 	});
+	// });
 
 	// Functions
 
