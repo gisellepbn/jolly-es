@@ -16,6 +16,6 @@ urlpatterns = [
     path('delete-quiz/<uuid:id>', views.delete_quiz, name='delete_quiz'),
     path('start-quiz/<uuid:id>', views.start_quiz, name='start_quiz'),
     path('scoreboard/<uuid:id>', views.scoreboard, name='scoreboard'),
-  
+
 
 ]
