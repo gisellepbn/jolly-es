@@ -324,8 +324,8 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	input_set.forEach((input) => {
-		input.addEventListener('invalid', () => {
-			this.setCustomValidity('Por favor, complete la información');
+		input.addEventListener('invalid', (e) => {
+			e.target.setCustomValidity('Por favor, complete la información');
 		});
 	});
 
