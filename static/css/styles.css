@@ -947,6 +947,10 @@ p {
     padding: 1.5rem;
   }
 }
+#start-quiz .active-question #refresh-icon {
+  color: #3f72af;
+  cursor: pointer;
+}
 #start-quiz .active-question .question-box {
   width: 100%;
   height: fit-content;

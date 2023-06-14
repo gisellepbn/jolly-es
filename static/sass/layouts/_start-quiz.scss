@@ -45,6 +45,11 @@
 			padding: $medium;
 		}
 
+		#refresh-icon {
+			color: $secondary-color;
+			cursor: pointer;
+		}
+
 		.question-box {
 			width: 100%;
 			height: fit-content;
