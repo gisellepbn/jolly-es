@@ -950,6 +950,7 @@ p {
 #start-quiz .active-question #refresh-icon {
   color: #3f72af;
   cursor: pointer;
+  padding-left: 0.5rem;
 }
 #start-quiz .active-question .question-box {
   width: 100%;
