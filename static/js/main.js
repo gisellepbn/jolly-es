@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const image_div = document.querySelector('.image');
 
 	// Input fields
-	const input = document.querySelectorAll('input');
+	const input_set = document.querySelectorAll('input');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		refresh_icon.addEventListener('click', reloadPage);
 	}
 
-	input.forEach((input) => {
+	input_set.forEach((input) => {
 		input.addEventListener('invalid', () => {
 			this.setCustomValidity('Por favor, complete la información');
 		});
