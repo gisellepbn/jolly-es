@@ -45,6 +45,16 @@
 			padding: $medium;
 		}
 
+		.num-participants {
+			color: $text-color;
+
+			#refresh-icon {
+				color: $secondary-color;
+				cursor: pointer;
+				padding-left: 0.5rem;
+			}
+		}
+
 		.question-box {
 			width: 100%;
 			height: fit-content;

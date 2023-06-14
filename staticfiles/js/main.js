@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const start_quiz = document.querySelector('#start-quiz');
 	const end_quiz_btn = document.querySelector('#end-quiz');
 	const scoreboard_btn = document.querySelector('#scoreboard');
+	const refresh_icon = document.querySelector('#refresh-icon');
 
 	// Scoreboard elements
 	const participant_box = document.querySelectorAll('.participant');
@@ -60,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	const scoreboard_container = document.querySelector('#scoreboard-container');
 	const back_btn = document.querySelector('.back-btn');
 	const image_div = document.querySelector('.image');
+
+	// Input fields
+	const input_set = document.querySelectorAll('input');
 
 	if (live_question) {
 		const question = live_question.dataset.question;
@@ -313,6 +317,16 @@ document.addEventListener('DOMContentLoaded', () => {
 	window.addEventListener('load', () => {
 		const loader = document.querySelector('.loader-container');
 		loader.style.display = 'none';
+	});
+
+	if (refresh_icon) {
+		refresh_icon.addEventListener('click', reloadPage);
+	}
+
+	input_set.forEach((input) => {
+		input.addEventListener('invalid', (e) => {
+			e.target.setCustomValidity('Por favor, complete la información');
+		});
 	});
 
 	// Functions
