@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		scoreboard_container.addEventListener('fullscreenchange', () => {
 			expand_btn.classList.toggle('hidden');
 			back_btn.classList.toggle('hidden');
-			// image_div.querySelector('img').classList.toggle('hidden');
+			image_div.querySelector('img').classList.toggle('hidden');
 		});
 	}
 
@@ -323,11 +323,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		refresh_icon.addEventListener('click', reloadPage);
 	}
 
-	// input_set.forEach((input) => {
-	// 	input.addEventListener('invalid', (e) => {
-	// 		e.target.setCustomValidity('Por favor, complete la información');
-	// 	});
-	// });
+	input_set.forEach((input) => {
+		input.addEventListener('invalid', (e) => {
+			e.target.setCustomValidity('Por favor, complete la información');
+		});
+	});
+
+	input_set.forEach((input) => {
+		input.addEventListener('input', (e) => {
+			e.target.setCustomValidity('');
+		});
+	});
 
 	// Functions
 
